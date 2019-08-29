@@ -1,0 +1,4 @@
+/vendor/
+# Not VSCode
+/.vscode/
+*.code-workspace

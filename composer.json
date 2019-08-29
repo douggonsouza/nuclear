@@ -1,0 +1,17 @@
+{
+    "name": "douggs/nuclear",
+    "description": "Pacote Nuclear Framework - PHP",
+    "type": "project",
+    "license": "Creative Commons - Atribuição-NãoComercial-CompartilhaIgual 4.0 Internacional",
+    "authors": [
+        {
+            "name": "douggonsouza",
+            "email": "douggonsouza@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "require": {
+        "php": ">=7.2.19"
+    }
+}
