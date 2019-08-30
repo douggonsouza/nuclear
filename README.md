@@ -7,12 +7,12 @@ GIT
 
   Para realizar a instalação do projeto pelo GIT. Dentro da pasta 'vendor', crie a pasta douggs.
   Depois, de dentro da pasta douggs clone o projeto executando o seguinte comando no terminal: 
-    <br>git clone https://github.com/douggonsouza/nuclear.git
+    <br><br>git clone https://github.com/douggonsouza/nuclear.git
 
 COMPOSER
 
   Após a instalação do Composer a nível de projeto ou globalmente, execute o seguinte comando no terminal:
-    - composer require douggs/nuclear
+    <br><br>composer require douggs/nuclear
 
 INSTALAR O PROJETO
 
