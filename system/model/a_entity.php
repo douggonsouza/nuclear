@@ -13,9 +13,9 @@
  *
  */
 
-namespace vendor\nuclear\system\model;
+namespace vendor\douggs\nuclear\system\model;
 
-use vendor\nuclear\system\model\orm;
+use vendor\douggs\nuclear\system\model\orm;
 
 abstract class a_entity{
 

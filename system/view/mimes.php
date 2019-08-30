@@ -13,7 +13,7 @@
  *
  */
 
-namespace vendor\nuclear\system\view;
+namespace vendor\douggs\nuclear\system\view;
 
 class mimes{
 

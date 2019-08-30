@@ -18,11 +18,11 @@
 	include_once dirname(__FILE__) .'/../configs/cfg.php';
 	include_once dirname(__FILE__) .'/../configs/geral.cfg';
 	// arquivos usados
-	use vendor\nuclear\configs\cfg;
-    use vendor\nuclear\loader\loader;
-    use vendor\nuclear\events\events;
-    use vendor\nuclear\system\routing;
-	use vendor\nuclear\app\orbe;
+	use vendor\douggs\nuclear\configs\cfg;
+    use vendor\douggs\nuclear\loader\loader;
+    use vendor\douggs\nuclear\events\events;
+    use vendor\douggs\nuclear\system\routing;
+	use vendor\douggs\nuclear\app\orbe;
     // Seta pasta de salvamento da sessão
     session_save_path(dirname(__FILE__) .'/../session');
     // inicia sessão da página

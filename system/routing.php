@@ -13,15 +13,15 @@
  *
  */
 
-namespace vendor\nuclear\system;
+namespace vendor\douggs\nuclear\system;
 
-use vendor\nuclear\system\control\controller;
-use vendor\nuclear\system\control\act;
-use vendor\nuclear\system\request\request;
-use vendor\nuclear\loader\loader;
-use vendor\nuclear\configs\cfg;
-use vendor\nuclear\app\orbe;
-use vendor\nuclear\system\view\display;
+use vendor\douggs\nuclear\system\control\controller;
+use vendor\douggs\nuclear\system\control\act;
+use vendor\douggs\nuclear\system\request\request;
+use vendor\douggs\nuclear\loader\loader;
+use vendor\douggs\nuclear\configs\cfg;
+use vendor\douggs\nuclear\app\orbe;
+use vendor\douggs\nuclear\system\view\display;
    
 class routing
 {

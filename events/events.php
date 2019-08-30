@@ -12,10 +12,10 @@
  *
  */
 
-namespace vendor\nuclear\events;
+namespace vendor\douggs\nuclear\events;
 
-    use vendor\nuclear\events\dir_xml;
-    use vendor\nuclear\events\assync;
+    use vendor\douggs\nuclear\events\dir_xml;
+    use vendor\douggs\nuclear\events\assync;
 
     class events extends assync{
         

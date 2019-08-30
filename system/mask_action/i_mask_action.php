@@ -1,6 +1,6 @@
 <?php
 
-namespace vendor\nuclear\system\mask_action;
+namespace vendor\douggs\nuclear\system\mask_action;
 
 interface i_mask_action{
 	

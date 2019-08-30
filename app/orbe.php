@@ -13,7 +13,7 @@
  *
  */
 
-namespace vendor\nuclear\app;
+namespace vendor\douggs\nuclear\app;
 
 use app\propertys;
     

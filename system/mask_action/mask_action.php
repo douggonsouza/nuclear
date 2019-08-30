@@ -1,8 +1,8 @@
 <?php
 
-namespace vendor\nuclear\system\mask_action;
+namespace vendor\douggs\nuclear\system\mask_action;
 
-use vendor\nuclear\system\mask_action\i_mask_action;
+use vendor\douggs\nuclear\system\mask_action\i_mask_action;
 
 class mask_action implements i_mask_action{
 

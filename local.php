@@ -24,7 +24,7 @@
     else
         define('DR',str_replace(array('\\','/'),DS,$_SERVER['DOCUMENT_ROOT']));
     // VA - Local na Vendor para a Anfiastro
-    define('VA',str_replace(array('\\','/'),DS,DR.DS.'vendor/nuclear'));
+    define('VA',str_replace(array('\\','/'),DS,DR.DS.'vendor/douggs/nuclear'));
 
     // DEFINIÇÕES DE URL
     // protocol - Protocolo utilizado na requisição

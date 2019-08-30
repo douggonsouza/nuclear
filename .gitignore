@@ -1,4 +1,6 @@
 /vendor/
+/configs/geral.cfg
+/index.php
 # Not VSCode
 /.vscode/
 *.code-workspace

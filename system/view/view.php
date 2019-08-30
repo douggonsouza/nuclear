@@ -13,11 +13,11 @@
  *
  */
 
-namespace vendor\nuclear\system\view;
+namespace vendor\douggs\nuclear\system\view;
 
-use vendor\nuclear\system\view\display;
-use vendor\nuclear\app\orbe;
-use vendor\nuclear\configs\cfg;
+use vendor\douggs\nuclear\system\view\display;
+use vendor\douggs\nuclear\app\orbe;
+use vendor\douggs\nuclear\configs\cfg;
 
 class view extends display
 {

@@ -12,9 +12,9 @@
  * visite http://creativecommons.org/licenses/by-nc-nd/4.0/.
  *
  */
-namespace vendor\nuclear\loader;
+namespace vendor\douggs\nuclear\loader;
 
-use vendor\nuclear\configs\cfg;
+use vendor\douggs\nuclear\configs\cfg;
 
 abstract class loader
 {

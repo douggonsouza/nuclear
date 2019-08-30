@@ -13,10 +13,10 @@
  *
  */
 
-namespace vendor\nuclear\system\view;
+namespace vendor\douggs\nuclear\system\view;
 
-use vendor\nuclear\system\view\mimes;
-use vendor\nuclear\configs\cfg;
+use vendor\douggs\nuclear\system\view\mimes;
+use vendor\douggs\nuclear\configs\cfg;
 
 class display{
 	
