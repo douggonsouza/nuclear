@@ -33,7 +33,7 @@
 	ini_set('display_errors', 1);
 
     // include defines
-    include "vendor/nuclear/local.php";
+    include "vendor/douggs/nuclear/local.php";
     // inicia app
     include VA."/app/load.php";
 ?>

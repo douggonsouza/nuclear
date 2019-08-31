@@ -11,7 +11,7 @@
  * visite http://creativecommons.org/licenses/by-nc-nd/4.0/.
 */
 
-namespace vendor\nuclear\configs;
+namespace vendor\douggs\nuclear\configs;
 
 abstract class cfg
 {

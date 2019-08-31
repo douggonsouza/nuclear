@@ -13,11 +13,11 @@
  *
  */
 
-namespace vendor\nuclear\system\model;
+namespace vendor\douggs\nuclear\system\model;
 
-use vendor\nuclear\system\model\entity;
-use vendor\nuclear\system\model\table;
-use vendor\nuclear\system\model\actions as action;
+use vendor\douggs\nuclear\system\model\entity;
+use vendor\douggs\nuclear\system\model\table;
+use vendor\douggs\nuclear\system\model\actions as action;
 
 abstract class orm
 {

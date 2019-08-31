@@ -14,7 +14,7 @@
  *
  */
 
-namespace vendor\nuclear\system\view;
+namespace vendor\douggs\nuclear\system\view;
 
 interface contract_view
 {

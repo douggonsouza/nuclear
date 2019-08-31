@@ -13,14 +13,14 @@
  *
  */
 
-namespace vendor\nuclear\system\control;
+namespace vendor\douggs\nuclear\system\control;
 
-use vendor\nuclear\system\view\view;
-use vendor\nuclear\system\model\entity;
-use vendor\nuclear\system\model\table;
-use vendor\nuclear\app\orbe;
-use vendor\nuclear\configs\cfg;
-use vendor\nuclear\system\model\orm;
+use vendor\douggs\nuclear\system\view\view;
+use vendor\douggs\nuclear\system\model\entity;
+use vendor\douggs\nuclear\system\model\table;
+use vendor\douggs\nuclear\app\orbe;
+use vendor\douggs\nuclear\configs\cfg;
+use vendor\douggs\nuclear\system\model\orm;
 	
 /**
  * Carrega registro de routes conforme a string de requesição

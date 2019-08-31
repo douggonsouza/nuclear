@@ -12,9 +12,9 @@
  *
  */
 
-namespace vendor\nuclear\events;
+namespace vendor\douggs\nuclear\events;
 
-use vendor\nuclear\configs\cfg;
+use vendor\douggs\nuclear\configs\cfg;
 
 
 class assync{

@@ -13,9 +13,9 @@
  *
  */
 
-namespace vendor\nuclear\system\model;
+namespace vendor\douggs\nuclear\system\model;
 
-use vendor\nuclear\system\model\a_entity;
+use vendor\douggs\nuclear\system\model\a_entity;
         
     /**
      * Entity

@@ -12,7 +12,7 @@
  *
  */
 
-namespace vendor\nuclear\events;
+namespace vendor\douggs\nuclear\events;
 
 
 class dir_xml{

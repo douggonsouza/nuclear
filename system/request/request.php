@@ -10,9 +10,9 @@
  * visite http://creativecommons.org/licenses/by-nc-nd/4.0/.
 */
 
-namespace vendor\nuclear\system\request;
+namespace vendor\douggs\nuclear\system\request;
 
-use vendor\nuclear\configs\cfg;
+use vendor\douggs\nuclear\configs\cfg;
 
 class request{
 

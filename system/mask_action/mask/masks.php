@@ -1,6 +1,6 @@
 <?php
 
-namespace vendor\nuclear\system\mask_action\mask;
+namespace vendor\douggs\nuclear\system\mask_action\mask;
 
 return array();
 
