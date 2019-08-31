@@ -74,7 +74,7 @@ class view extends display
     {
         if(isset($this->layout) && strlen($this->layout) > 0){
             $this->variables($model);
-            parent::body($this->layout, $this->variables);
+            parent::body($this->layouts.DS.$this->layout, $this->variables);
         }
     }
 

@@ -12,9 +12,9 @@
  * visite http://creativecommons.org/licenses/by-nc-nd/4.0/.
  *
  */
-namespace vendor\nuclear\loader;
+namespace vendor\douggs\nuclear\loader;
 
-use vendor\nuclear\configs\cfg;
+use vendor\douggs\nuclear\configs\cfg;
 
 abstract class loader
 {
@@ -22,7 +22,7 @@ abstract class loader
 	static public $root;
 	static public $file;
  
-	public function start($root = null)
+	public static function start($root = null)
 	{
 		self::setRoot($root);
 		// define a função autoloader
@@ -75,7 +75,7 @@ abstract class loader
 	/**
 	 * Get the value of file
 	 */ 
-	public function getFile()
+	public static function getFile()
 	{
 		return self::$file;
 	}
@@ -85,7 +85,7 @@ abstract class loader
 	 *
 	 * @return  self
 	 */ 
-	public function setFile($file)
+	public static function setFile($file)
 	{
 		self::$file = str_replace(
 			array('\\','/'),
