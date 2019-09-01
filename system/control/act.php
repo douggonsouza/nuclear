@@ -1,17 +1,4 @@
 <?php
-/**
- * MVC
- *
- * Suporte à requisições WEB com MVC.
- * carregamento de classes semelhantes como propriedades.
- * @version 1.00000.00.00000
- * @copyright De Souza Informática - 2016
- * @license Este trabalho está licenciado sob uma Licença
- * Creative Commons Atribuição-NãoComercial-SemDerivações
- * 4.0 Internacional. Para ver uma cópia desta licença,
- * visite http://creativecommons.org/licenses/by-nc-nd/4.0/.
- *
- */
 
 namespace vendor\douggs\nuclear\system\control;
 
@@ -62,8 +49,7 @@ abstract class act
         // Altera propriedades
         orm::setModel(self::$request->localModel);
         $this->setLayouts(self::$request->layout);
-        $this->setLayout(self::$request->fileLayout);
-        // $this->addLayout(self::$request->fileLayout);
+        $this->setLayout(cfg::rescue('root')['default_layout']);
         $this->notFound(self::$request->notFound);
         $this->setTemplates(self::$request->localView);
         // define variaveis para o ambiente
@@ -133,11 +119,11 @@ abstract class act
      */
     final public function addLayout($name)
     {
-        if(isset($name) || strlen($name) == 0){
+        if(isset($name) || !empty($name)){
             $layout = str_replace(
                 array('/','//','\\','\\\\'),
                 '/',
-                $this->request->layout.DS.$name);
+                $name);
             $this->view->layout($layout);
             return;
         }
@@ -305,15 +291,6 @@ abstract class act
     final public function setView($template = null, $model = null)
     {
         $this->view($template, $model);
-    }
-
-    /**
-     * Responde uma requisi��o para um desenvolvimento
-     * @param unknown $my
-     */
-    final public function development($template = null, $model = null, $layout = null)
-    {
-        $this->view->development($template, $model, $layout);
     }
     
     /**

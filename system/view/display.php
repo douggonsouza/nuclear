@@ -1,17 +1,4 @@
 <?php
-/**
- * MVC
- *
- * Suporte à requisições WEB com MVC.
- * carregamento de classes semelhantes como propriedades.
- * @version 1.00000.00.00000
- * @copyright De Souza Informática - 2016
- * @license Este trabalho está licenciado sob uma Licença
- * Creative Commons Atribuição-NãoComercial-SemDerivações
- * 4.0 Internacional. Para ver uma cópia desta licença,
- * visite http://creativecommons.org/licenses/by-nc-nd/4.0/.
- *
- */
 
 namespace vendor\douggs\nuclear\system\view;
 

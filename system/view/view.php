@@ -1,17 +1,4 @@
 <?php
-/**
- * MVC
- *
- * Suporte à requisições WEB com MVC.
- * carregamento de classes semelhantes como propriedades.
- * @version 1.00000.00.00000
- * @copyright De Souza Informática - 2016
- * @license Este trabalho está licenciado sob uma Licença
- * Creative Commons Atribuição-NãoComercial-SemDerivações
- * 4.0 Internacional. Para ver uma cópia desta licença,
- * visite http://creativecommons.org/licenses/by-nc-nd/4.0/.
- *
- */
 
 namespace vendor\douggs\nuclear\system\view;
 
@@ -67,7 +54,7 @@ class view extends display
     }
 
 	/**
-	 * Prepara resposta tipo view
+	 * Requisita carregamento do template com endereço completo
 	 * @param unknown $my
 	 */
     final public function view($model = null)
@@ -76,88 +63,6 @@ class view extends display
             $this->variables($model);
             parent::body($this->layouts.DS.$this->layout, $this->variables);
         }
-    }
-
-    /**
-     * Prepara resposta tipo view
-     * @param unknown $my
-     */
-    final public function video($template, $model = null, $layout = null)
-    {
-        if(isset($template) && strlen($template) > 0){
-            $this->variables($model);
-            $this->setTemplate($template);
-            $this->layout($layout);                                     
-            parent::body($this->layout, $this->variables);
-        }
-    }
-
-    /**
-     * Resposta para �rea tipo development
-     * @param unknown $variables
-     * @param unknown $layout
-     * @param unknown $template
-     * @throws Exception
-     */
-    final public function development($template, $variables = null, $layout = null)
-    {
-
-        try{
-            $this->video($template, $variables, $layout);
-        }
-        catch(EngineException $e){
-            var_dump( $e->getMessage());
-        }
-        echo'   <style>
-            .info{
-                width: 100%;
-                font-family: Arial;
-                font-size: 9pt;
-            }
-            .info tr td{
-                display: block;
-                margin: 0 auto;
-            }
-            .info div{
-                background-color: #111111;
-            }
-            .info h5{
-                color: blue;
-                margin: 0;
-                padding: 0;
-                font-size: 10pt;
-            }
-            .info span{
-                font-family: Arial;
-                font-size: 9pt;
-                color: #999999;
-            }
-        </style>
-            <table class="info">
-                <tr>
-                    <td>
-                        <button onclick="window.history.back();"> Voltar </button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <div><h5>VARIAVEIS DE AMBIENTE</h5><span>'.$this->arrayToHTML($this->variables).'</span></div>
-                        <div><h5>VARIAVEIS SESSAO</h5><span>'.$this->arrayToHTML($_ENV).'</span></div>
-                        <div><h5>SESSION</h5><span>'.$this->arrayToHTML($_SESSION).'</span></div>
-                        <div><h5>REQUEST</h5><span>'.$this->arrayToHTML($_REQUEST).'</span></div>
-                        <div><h5>QUERYS</h5><span>'.$this->arrayToHTML($log::getQuery()).'</span></div>
-                        <div><h5>LAYOUT</h5><span>'.$this->layout.'</span></div>
-                        <div><h5>TEMPLATES</h5><span>'.$this->arrayToHTML($log::getTemplate()).'</span></div>
-                        <div><h5>CONTENTS</h5><span>'.$this->arrayToHTML($log::getContent()).'</span></div>
-                        <div><h5>BLOCKS</h5><span>'.$this->arrayToHTML($log::getBlock()).'</span></div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <button onclick="window.history.back();"> Voltar </button>
-                    </td>
-                </tr>
-            </table>';
     }
     
     /**
@@ -169,10 +74,8 @@ class view extends display
     final public function layout($local)
     {
         if(isset($local)){
-            if(file_exists($local)){
-                $this->layout = $local;
-                return true;
-            }                
+            $this->layout = $local;
+            return true;               
         }
         return false;
     }
@@ -193,57 +96,28 @@ class view extends display
     }
     
     /**
-	 * Prepara resposta tipo content
+	 * Requisita o carregamento do template
 	 * @param unknown $my
 	 */
     final public function content($name = null, $model = null)
     {
-        if( isset($name) && !empty($name)){
-            $this->variables($model);
+        $this->variables($model);
+        if(isset($name) && !empty($name))
             $this->setTemplate($name);                    
-            if(isset($this->template))
-                parent::body($this->templates.DS.$this->template, $this->variables);
-            return true;
-        }
-        $this->variables($model);
-        if(isset($this->template)){
-            parent::body($this->templates.DS.$this->template, $this->variables);
-            return true;
-        }
-        return false;
-	}
-
-    /*
-	 * Prepara resposta tipo content
-	 * @param unknown $my
-	 */
-    final public function block($template = null, $model = null)
-    {
-        $saida = '';
-        $this->variables($model);
-        if( isset($this->rota['action']) ){                   
-            $tmp = $this->view.DS.$template;
-            parent::body($tmp, $this->variables);
-        }
-        else{
-            if(isset($this->template) && strlen($this->template) > 0){
-                parent::body($this->template, $this->variables);
-            }
-        }
+        parent::body($this->templates.DS.$this->template, $this->variables);
+        return true;
 	}
     
     /**
-     * Responde requisi��o de json
+     * Responde a requisição com um array do tipo json
      * @param array $variables
      */
     final public function json($variables)
     {
-        $this->variables($variables);
-        if(isset($this->variables) && count($this->variables) > 0){
-            header('Content-Type: application/json');
-            exit( (json_encode($this->variables)) );
-        }
-        exit(null);
+        if(!isset($variables) || empty($variables))
+            throw new \Exception("Variables JSON not found");
+        header('Content-Type: application/json');
+        exit( (json_encode($this->variables)));
     }
     
     /**
@@ -252,15 +126,14 @@ class view extends display
      */
     final public function html($html)
     {
-        if(isset($html) && strlen($html) > 0){
-            header('Content-Type: application/json');
-            exit($html);
-        }
-        exit(null);
+        if(!isset($html) || empty($html))
+            throw new \Exception("HTML responce not found");
+        header('Content-Type: application/json');
+        exit($html);
     }
     
     /**
-     * Carrega parte da página
+     * Requisita o template na raiz da VIEW
      * @param string $name
      * @return type
      */
@@ -270,14 +143,10 @@ class view extends display
             array('/','//','\\','\\\\'),
             '/',
             $this->localView.'/../'.DS.$name);
-        if(file_exists($partial)){
-            parent::body($partial,$model);
-            return;
-        }
-        throw new \Exception('Not found partial.');
+        parent::body($partial,$model);
+        return;
 	}
 	
-
 	/**
 	 * Cria variável global a partir de params
 	 * @param array $params

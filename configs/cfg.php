@@ -1,16 +1,5 @@
 <?php
 
-/**
- * CONFIG
- * @copyright Copyright (C) 2019 Gonçalves Informática. All rights reserved.
- * @license Copyright (C) 2019 Gonçalves Informática. All rights reserved.
- * @author Gonçalves Informática <douggonsouza@gmail.com>
- * @license Este trabalho está licenciado sob uma Licença
- * Creative Commons Atribuição-NãoComercial-SemDerivações
- * 4.0 Internacional. Para ver uma cópia desta licença,
- * visite http://creativecommons.org/licenses/by-nc-nd/4.0/.
-*/
-
 namespace vendor\douggs\nuclear\configs;
 
 abstract class cfg
