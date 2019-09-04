@@ -2,9 +2,11 @@
 
 namespace vendor\douggs\nuclear\system\model;
 
+use vendor\douggs\nuclear\system\model\connection;
 use vendor\douggs\nuclear\system\model\entity;
 use vendor\douggs\nuclear\system\model\table;
 use vendor\douggs\nuclear\system\model\actions as action;
+
 
 abstract class orm
 {
@@ -29,7 +31,8 @@ abstract class orm
     public function __start()
     {
         // coleta conexão
-        self::$conn = db::origem();
+        if(!isset(self::$conn))
+            self::$conn = connection::origem();
     }
 
     public function getConn()
@@ -196,44 +199,5 @@ abstract class orm
         }
         return null;
     }
-    
-    /**
-     * Identifica e exporta local para a pasta
-     */
-    // private function location($local, $path = CONTROLLER){
-        
-    //     $saida = '';
-    //     $view = $this->localPathDefaultSystem($path);
-    //     // existe local e ultimo controller
-    //     if(isset($local)) {                
-            
-    //         // existe entrada
-    //         if(strlen($local) > 0){
-    
-    //             // formata local
-    //             $local = str_replace(array('\\','/'),'/',$local);
-    //             // passado a localiza��o do template a partir da pasta base (view) ~/
-    //             if((preg_match('/^(~\/)/m',$local,$match))){
-    
-    //                 //reformata arquivo
-    //                 $arq = str_replace(array('\\','/'),DS,$local);
-    //                 $saida = $view.substr($arq,1,strlen($arq));
-    //             }
-    //             elseif((preg_match('/^(~)/m',$local,$match))){ // passado o nome do template com ou sem extens�o - ~
-    
-    //                 //reformata arquivo
-    //                 $arq = str_replace(array('\\','/'),DS,$local);
-    //                 $saida = $view.DS.substr($arq,1,strlen($arq));
-    //             }
-    //             else{ // passado o caminho completo - :
-    
-    //                 //reformata arquivo
-    //                 $arq = str_replace(array('\\','/'),DS,$local);
-    //                 $saida = $arq;
-    //             }
-    //         }
-    //     }
-    //     return $saida;
-    // }
 	
 }
