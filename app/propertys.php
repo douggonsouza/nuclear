@@ -1,6 +1,6 @@
 <?php
 
-namespace vendor\douggs\nuclear\app;
+namespace vendor\douggs\nucelapp;
 
 
 class propertys extends \stdClass{

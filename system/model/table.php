@@ -98,6 +98,30 @@ use vendor\douggs\nuclear\system\model\entity;
          */
         public function getPk(){
             return parent::key($this->infoTable);
-        }		
+        }
+        
+        /**
+         * Exporta o nome do campo de chave estrngeira
+         * @return type
+         */
+        public function key($info){
+            foreach($info as $vle){
+                if($vle['Key'] == 'PRI')
+                    return $vle['Field']; 
+            }
+            return $this;
+        }
+
+        /**
+         * Colhe as informações das colunas da tabela
+         * 
+         * @param string $table
+         */
+        public function getColumns($table)
+        {
+            if(isset($table))
+                return orm::query('show columns from '.$table.';');
+            throw new \Exception('Not found table for entity.');
+        }
     }
 ?>

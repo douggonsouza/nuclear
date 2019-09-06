@@ -5,9 +5,6 @@ namespace system\model\actions;
 	use system\model\actions\Action;
     use system\model\entity;
     use system\model\table;
-    use system\model\actions\log;
-    use system\model\a_entity;
-    use app\orbe;
 	
 	class Insert implements Action{
 		
@@ -83,9 +80,6 @@ namespace system\model\actions;
 
                                     $rst = $stt->fetchAll(\PDO::FETCH_ASSOC);
                                     $this->status = (int) $rst[0][$entity->getPk()];
-                                    // log
-                                    $logs = orbe::rescue('logs');
-                                    $logs::setQuery($sql);
                                     return $this->status;
                                 }
                             }

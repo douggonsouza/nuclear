@@ -3,14 +3,8 @@
     /*
      * CARREGAR DADOS GLOBAIS DE ACESSO
      * 
-     * Framework Orbe - TRR
-     * author Douglas Gonçalves de Souza
-     * home - version 1.0000.0000.0000 - 2019-08-15
-     * 
-     * Creative Commons - Atribuição-NãoComercial-CompartilhaIgual 4.0 Internacional.
-     * Baseado no trabalho disponível em https://bitbucket.org/douggonsouza/anfiastro.
-     * Podem estar disponíveis autorizações adicionais às concedidas no âmbito desta
-     * licença em https://bitbucket.org/douggonsouza/anfiastro.
+     * Nuclear Framework - PHP
+     * @author Douglas Gonçalves de Souza
      * 
      * Configura INI para apresentação dos erros
 	 * E_ERROR

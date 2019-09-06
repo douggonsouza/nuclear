@@ -5,9 +5,6 @@ namespace system\model\actions;
 	use system\model\actions\Action;
     use system\model\entity;
     use system\model\table;
-    use system\model\actions\log;
-    use system\model\a_entity;
-    use app\orbe;
 	
 	class Delete implements Action{
 		
@@ -66,9 +63,6 @@ namespace system\model\actions;
                                 $stt = $this->conn->prepare($sql);
                                 // executa deleção
                                 $this->status = $stt->execute();
-                                // log
-                                $logs = orbe::rescue('logs');
-                                $logs::setQuery($sql);
                                 return $this->status;
                             }
                         }

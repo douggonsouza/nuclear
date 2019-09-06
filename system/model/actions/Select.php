@@ -5,9 +5,6 @@ namespace system\model\actions;
 use system\model\actions\Action;
 use system\model\entity;
 use system\model\table;
-use system\model\actions\log;
-use system\model\a_entity;
-use app\orbe;
 
 	class Select implements Action{
 
@@ -67,9 +64,6 @@ use app\orbe;
                         if($stt->execute()){
 
                             $this->status = $stt->fetchAll(\PDO::FETCH_ASSOC);
-                            // log
-                            $logs = orbe::rescue('logs');
-                            $logs::setQuery($sql);
                             return $this->status();
                         }
                     }
@@ -112,8 +106,8 @@ use app\orbe;
 
                 $vector  = $entity->getFields();
                 // coleta dados tabela
-                $table  = (isset($entity->getTable()))? $entity->getTable(): '';
-                $where  = (isset($this->where))? $this->where: null;
+                $table  = ($entity->getTable() !== null)? $entity->getTable(): '';
+                $where  = ($this->where !== null)? $this->where: null;
                 // testa tamanho do array
                 if(isset($vector) && count($vector) > 0 && isset($table) && count($table) > 0){
 

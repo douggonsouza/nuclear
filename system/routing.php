@@ -2,7 +2,6 @@
 
 namespace vendor\douggs\nuclear\system;
 
-use vendor\douggs\nuclear\system\control\controller;
 use vendor\douggs\nuclear\system\control\act;
 use vendor\douggs\nuclear\system\request\request;
 use vendor\douggs\nuclear\loader\loader;

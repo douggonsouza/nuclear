@@ -2,15 +2,6 @@
     /*
      * CARREGAR DADOS GLOBAIS DE ACESSO
      * 
-     * Framework Orbe - TRR
-     * author Douglas Gonçalves de Souza
-     * home - version 1.0000.0000.0000 - 2019-08-15
-     * 
-     * Creative Commons - Atribuição-NãoComercial-CompartilhaIgual 4.0 Internacional.
-     * Baseado no trabalho disponível em https://bitbucket.org/douggonsouza/anfiastro.
-     * Podem estar disponíveis autorizações adicionais às concedidas no âmbito desta
-     * licença em https://bitbucket.org/douggonsouza/anfiastro.
-     * 
      */
 
     // DEFINIÇÕES DE LOCAL
@@ -36,5 +27,39 @@
     // SN - URL do DNS
     define('SN',$_SERVER['SERVER_NAME']);
 
-        
+    // autoloader
+    include VA.DS.'autoloader.php';
+
+    // realiza o carregamento automático do módulo
+    $loading = new vendor\douggs\nuclear\autoloader();
+
+    $loading->add(VA.DS.'configs/cfg.php')
+        ->add(VA.DS.'app/propertys.php')
+        ->add(VA.DS.'app/orbe.php')
+        ->add(VA.DS.'events/dir_xml.php')
+        ->add(VA.DS.'events/assync.php')
+        ->add(VA.DS.'events/events.php')
+        ->add(VA.DS.'system/mask_action/i_mask_action.php')
+        ->add(VA.DS.'system/mask_action/mask_action.php')
+        ->add(VA.DS.'system/model/a_entity.php')
+        ->add(VA.DS.'system/model/entity.php')
+        ->add(VA.DS.'system/model/table.php')
+        ->add(VA.DS.'system/model/actions/Action.php')
+        ->add(VA.DS.'system/model/actions/Call.php')
+        ->add(VA.DS.'system/model/actions/Delete.php')
+        ->add(VA.DS.'system/model/actions/Insert.php')
+        ->add(VA.DS.'system/model/actions/Query.php')
+        ->add(VA.DS.'system/model/actions/Select.php')
+        ->add(VA.DS.'system/model/actions/Update.php')
+        ->add(VA.DS.'system/model/orm.php')
+        ->add(VA.DS.'system/view/mimes.php')
+        ->add(VA.DS.'system/view/display.php')
+        ->add(VA.DS.'system/view/view.php')
+        ->add(VA.DS.'system/request/request.php')
+        ->add(VA.DS.'system/control/act.php')
+        ->add(VA.DS.'system/routing.php');
+    $loading->loadList();
+
+    $loading->loader(DR.DS.'root','autoloader.php');
+
 ?>

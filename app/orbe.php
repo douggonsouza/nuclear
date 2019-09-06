@@ -2,7 +2,7 @@
 
 namespace vendor\douggs\nuclear\app;
 
-use app\propertys;
+use vendor\douggs\nuclear\app\propertys;
     
 abstract class orbe extends \stdClass
 {

@@ -50,25 +50,14 @@ abstract class a_entity{
      * Exporta o nome do campo de chave estrngeira
      * @return type
      */
-    public function key($info){
-        foreach($info as $vle){
-            if($vle['Key'] == 'PRI')
-                return $vle['Field']; 
-        }
-        return $this;
-    }
+    abstract public function key($info);
 
     /**
      * Colhe as informações das colunas da tabela
      * 
      * @param string $table
      */
-    protected function getColumns($table)
-    {
-        if(isset($table))
-            return orm::query('show columns from '.$table.';');
-        throw new \Exception('Not found table for entity.');
-    }
+    abstract public function getColumns($table);
 }
 
 ?>

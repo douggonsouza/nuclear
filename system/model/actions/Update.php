@@ -5,8 +5,6 @@ namespace system\model\actions;
 	use system\model\actions\Action;
     use system\model\entity;
     use system\model\table;
-    use system\model\actions\log;
-    use system\model\a_entity;
 
 	class Update implements Action{
 		
@@ -61,9 +59,6 @@ namespace system\model\actions;
                         $stt = $this->conn->prepare($sql);
                         // testa a execução da inclusão
                         $this->status = $stt->execute();
-                        // log
-                        $logs = orbe::rescue('logs');
-                        $logs::setQuery($sql);
                         return $this->status;
                     }
                     else // diapara erro
@@ -101,8 +96,8 @@ namespace system\model\actions;
 
                 $vector = $entity->getFields();
                 // coleta dados tabela
-                $table  = (isset($entity->getTable()))? $entity->getTable(): '';
-                $where  = (isset($this->where))? $this->where: null;
+                $table  = ($entity->getTable() !== null)? $entity->getTable(): '';
+                $where  = ($this->where !== null)? $this->where: null;
                 // testa tamanho do array
                 if(isset($vector) && count($vector) > 0 && isset($table) && count($table) > 0){
 

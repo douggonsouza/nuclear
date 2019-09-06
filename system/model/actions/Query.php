@@ -4,9 +4,6 @@ namespace system\model\actions;
 
 use system\model\actions\Action;
 use system\model\entity;
-use system\model\actions\log;
-use system\model\a_entity;
-use app\orbe;
 
 class Query implements Action
 {
@@ -58,8 +55,6 @@ class Query implements Action
             $stt = $this->conn->prepare($query);
             if($stt->execute()){
                 $this->status = $stt->fetchAll(\PDO::FETCH_ASSOC);
-                // log
-                $logs = orbe::rescue('logs');
                 $logs::setQuery($query);
                 return $this->status();
             }
