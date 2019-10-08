@@ -1,6 +1,6 @@
 <?php 
 
-namespace vendor\douggs\nucclear\events;
+namespace vendor\douggs\nuclear\events;
 
 use vendor\douggs\nuclear\configs\cfg;
 
