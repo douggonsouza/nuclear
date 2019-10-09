@@ -127,7 +127,7 @@ class request{
             DS.$this->subdomain
         );
         $this->localController = $this->separatorForDir(
-            DRT.$this->rootBase.DS.$this->subdomain.DS.'controllers'
+            DRT.DS.$this->rootBase.DS.$this->subdomain.DS.'controllers'
         );
         $this->controller = $this->separatorForNamespace(
             $this->rootBase.DS.$this->subdomain.DS.'controllers'.DS.$defaultController
@@ -136,28 +136,28 @@ class request{
             $this->rootBase.DS.$this->subdomain.DS.'models'.DS.$defaultController
         );
         $this->localModel = $this->separatorForDir(
-            DRT.$this->rootBase.DS.$this->subdomain.DS.'models'
+            DRT.DS.$this->rootBase.DS.$this->subdomain.DS.'models'
         );
         $this->localView = $this->separatorForDir(
-            DRT.$this->rootBase.DS.$this->subdomain.DS.'views'
+            DRT.DS.$this->rootBase.DS.$this->subdomain.DS.'views'
         );
         $this->view = $this->separatorForDir(
-            DRT.$this->rootBase.DS.$this->subdomain.DS.'views'.DS.$defaultController
+            DRT.DS.$this->rootBase.DS.$this->subdomain.DS.'views'.DS.$defaultController
         );
         $this->management = $this->separatorForDir(
-            DRT.$this->rootBase.DS.$this->subdomain.DS.'managements'
+            DRT.DS.$this->rootBase.DS.$this->subdomain.DS.'managements'
         );
         $this->script = $this->separatorForDir(
             $this->rootBase.DS.$this->subdomain.DS.'scripts'
         );
         $this->media = $this->separatorForDir(
-            DRT.$this->rootBase.DS.$this->subdomain.DS.'media'
+            DRT.DS.$this->rootBase.DS.$this->subdomain.DS.'media'
         );
         $this->layout = $this->separatorForDir(
-            DRT.$this->rootBase.DS.$this->subdomain.DS.'layouts'
+            DRT.DS.$this->rootBase.DS.$this->subdomain.DS.'layouts'
         );
         $this->fileLayout = $this->separatorForDir(
-            DRT.$this->rootBase.DS.$this->subdomain.DS.'layouts/'.$fileLayout
+            DRT.DS.$this->rootBase.DS.$this->subdomain.DS.'layouts/'.$fileLayout
         );
         // if($this->request !== '/'){
             if(!$this->searchRoutes($this->request)){
@@ -183,31 +183,31 @@ class request{
             DS.$this->subdomain
         );
         $this->localFile = $this->separatorForDir(
-            DRT.$this->rootBase.DS.$this->subdomain.DS.$this->request
+            DRT.DS.$this->rootBase.DS.$this->subdomain.DS.$this->request
         );
         $this->localController = $this->separatorForDir(
-            DRT.$this->rootBase.DS.$this->subdomain.DS.'controllers'
+            DRT.DS.$this->rootBase.DS.$this->subdomain.DS.'controllers'
         );
         $this->localModel = $this->separatorForDir(
-            DRT.$this->rootBase.DS.$this->subdomain.DS.'models'
+            DRT.DS.$this->rootBase.DS.$this->subdomain.DS.'models'
         );
         $this->localView = $this->separatorForDir(
-            DRT.$this->rootBase.DS.$this->subdomain.DS.'views'
+            DRT.DS.$this->rootBase.DS.$this->subdomain.DS.'views'
         );
         $this->management = $this->separatorForDir(
-            DRT.$this->rootBase.DS.$this->subdomain.DS.'managements'
+            DRT.DS.$this->rootBase.DS.$this->subdomain.DS.'managements'
         );
         $this->script = $this->separatorForDir(
             $this->rootBase.DS.$this->subdomain.DS.'scripts'
         );
         $this->media = $this->separatorForDir(
-            DRT.$this->rootBase.DS.$this->subdomain.DS.'media'
+            DRT.DS.$this->rootBase.DS.$this->subdomain.DS.'media'
         );
         $this->layout = $this->separatorForDir(
-            DRT.$this->rootBase.DS.$this->subdomain.DS.'layouts'
+            DRT.DS.$this->rootBase.DS.$this->subdomain.DS.'layouts'
         );
         $this->fileLayout = $this->separatorForDir(
-            DRT.$this->rootBase.DS.$this->subdomain.DS.'layouts/'.$fileLayout
+            DRT.DS.$this->rootBase.DS.$this->subdomain.DS.'layouts/'.$fileLayout
         );
         if($this->request !== '/'){
             if(!$this->searchFilename($this->request)){
@@ -334,25 +334,25 @@ class request{
                 $controller
             );
             $this->localController = $this->separatorForDir(
-                DRT.$controller
+                DRT.DS.$controller
             );
             $model = $this->rootBase.DS.$this->subdomain.DS.'models';
             $this->model = $this->separatorForNamespace(
                 $model
             );
             $this->localModel = $this->separatorForDir(
-                DRT.$model
+                DRT.DS.$model
             );
             $view = $this->rootBase.DS.$this->subdomain.DS.'views'.DS.$this->baseController;
             $this->view = $this->separatorForNamespace(
                 $view
             );
             $this->localView = $this->separatorForDir(
-                DRT.$view
+                DRT.DS.$view
             );
             $fileLayout = $this->rootBase.DS.$this->subdomain.DS.'layouts/'.cfg::rescue('root')['default_layout'];
             $this->fileLayout = $this->separatorForDir(
-                DRT.$fileLayout
+                DRT.DS.$fileLayout
             );
             $this->isCtrl = true;
             foreach($clearWalls as $value){
@@ -363,25 +363,25 @@ class request{
                             $controller
                         );
                         $this->localController = $this->separatorForDir(
-                            DRT.$controller
+                            DRT.DS.$controller
                         );
                         $model = $this->rootBase.DS.$this->subdomain.DS.'models'.DS.$value;
                         $this->model = $this->separatorForNamespace(
                             $model
                         );
                         $this->localModel = $this->separatorForDir(
-                            DRT.$model
+                            DRT.DS.$model
                         );
                         $view = $this->rootBase.DS.$this->subdomain.DS.'views'.DS.$value;
                         $this->view = $this->separatorForNamespace(
                             $view
                         );
                         $this->localView = $this->separatorForDir(
-                            DRT.$view
+                            DRT.DS.$view
                         );
                         $fileLayout = $this->rootBase.DS.$this->subdomain.DS.'layouts/'.cfg::rescue('root')['default_layout'];
                         $this->fileLayout = $this->separatorForDir(
-                            DRT.$fileLayout
+                            DRT.DS.$fileLayout
                         );
                         $this->isCtrl     = true;
                     break;

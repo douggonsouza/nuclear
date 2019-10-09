@@ -76,8 +76,8 @@ abstract class act
                 '/',
                 DS.self::$request->subdomain.DS.self::$request->script);
         define('__oBaseScripts',$__oBaseScripts);
-        define('__oLocal',cfg::rescue('general')['BASEHOST']);
-                $this->view->variables([
+        define('__oLocal',PROTOCOL.HH);
+        $this->view->variables([
             '__oScripts'     => $__oScripts,
             '__oLocal'       => __oLocal,
             '__oBase'        => $__oBase,
