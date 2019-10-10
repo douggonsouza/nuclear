@@ -4,9 +4,9 @@
      * CARREGAR DADOS GLOBAIS DE ACESSO
      * 
      * Nuclear Framework - PHP
-     * @author Douglas Gonçalves de Souza
+     * @author Douglas GonÃ§alves de Souza
      * 
-     * Configura INI para apresentação dos erros
+     * Configura INI para apresentaÃ§Ã£o dos erros
 	 * E_ERROR
 	 * E_WARNING
 	 * E_PARSE
@@ -27,7 +27,7 @@
 	ini_set('display_errors', 1);
 
     // include defines
-    include "vendor/douggs/nuclear/local.php";
+    include "root/defines.php";
     // inicia app
     include VA."/app/load.php";
 ?>
