@@ -19,7 +19,7 @@
 
     // DEFINIÇÕES DE URL
     // protocol - Protocolo utilizado na requisição
-    $protocol = strtolower(explode('/',$_SERVER['SERVER_PROTOCOL'])[0]).'://';
+    define('PROTOCOL', strtolower(explode('/',$_SERVER['SERVER_PROTOCOL'])[0]).'://');
     // HH - URL completa
     define('HH',$_SERVER['HTTP_HOST']);
     // REQUEST

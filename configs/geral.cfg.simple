@@ -16,12 +16,9 @@
     'general' => [
         'DOCUMENT_ROOT' => $_SERVER['DOCUMENT_ROOT'],
         'SERVER_NAME'   => $_SERVER['SERVER_NAME'],
-        'BASEREQUEST'   => SN.RU,
-        'BASEHOST'      => $protocol.HH.str_replace(
-            array('\\','/'),
-            '/',
-            str_replace(LC, '', str_replace( DR, '', FL))),
-        'protocol'      => strtolower(explode('/',$_SERVER['SERVER_PROTOCOL'])[0]).'://'
+        'BASEREQUEST'   => DRT,
+        'BASEHOST'      => PROTOCOL.HH,
+        'protocol'      => PROTOCOL
     ],
     // Configurações para a requisição direta
     'direct_request' => [
