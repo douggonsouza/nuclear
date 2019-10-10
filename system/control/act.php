@@ -8,11 +8,11 @@ use vendor\douggs\nuclear\system\model\table;
 use vendor\douggs\nuclear\app\orbe;
 use vendor\douggs\nuclear\configs\cfg;
 use vendor\douggs\nuclear\system\model\orm;
-	
+    
 /**
- * Carrega registro de routes conforme a string de requesição
- * @copyright De Souza Informática
- * @author Douglas Gonçalves de Souza
+ * Carrega registro de routes conforme a string de requesiÃ§Ã£o
+ * @copyright De Souza InformÃ¡tica
+ * @author Douglas GonÃ§alves de Souza
  * @version 16/09/2015 1.006.0000
  */
 abstract class act
@@ -30,12 +30,12 @@ abstract class act
      */
     public function __construct()
     {
-        // Função de partida
+        // FunÃ§Ã£o de partida
         $this->__start();
     }
 
     /**
-     * Função que inicialização
+     * FunÃ§Ã£o que inicializaÃ§Ã£o
      *
      * @return void
      */
@@ -63,30 +63,32 @@ abstract class act
      */
     private function defineVariables()
     {
-        $__oScripts = str_replace(
+        define('__oScripts',str_replace(
             array('/','//','\\','\\\\'),
             '/',
-            self::$request->script);
-        define('__oScripts',$__oScripts);
-        $__oBase = str_replace(array('/','//','\\','\\\\'),
+            self::$request->script)
+        );
+        define('__oBase',str_replace(array('/','//','\\','\\\\'),
             '/',
-            DRT.DS.cfg::rescue('root')['base'].DS.self::$request->subdomain);
-        define('__oBase',$__oBase);
-        $__oBaseScripts = str_replace(array('/','//','\\','\\\\'),
+            DRT.DS)
+        );
+        define('__oBaseScripts',str_replace(array('/','//','\\','\\\\'),
                 '/',
-                DS.self::$request->subdomain.DS.self::$request->script);
-        define('__oBaseScripts',$__oBaseScripts);
+                DRT.DS.self::$request->script)
+        );
         define('__oLocal',PROTOCOL.HH);
+        define('__oLocalScripts', __oLocal.DS.__oScripts);
         $this->view->variables([
-            '__oScripts'     => $__oScripts,
-            '__oLocal'       => __oLocal,
-            '__oBase'        => $__oBase,
-            '__oBaseScripts' => $__oBaseScripts
+            '__oScripts'      => __oScripts,
+            '__oLocal'        => __oLocal,
+            '__oLocalScripts' => __oLocalScripts,
+            '__oBase'         => __oBase,
+            '__oBaseScripts'  => __oBaseScripts
         ]);
     }
 
     /**
-     * Adiciona um objeto request à controller
+     * Adiciona um objeto request Ã  controller
      *
      * @param object $request
      * @return void
@@ -98,7 +100,7 @@ abstract class act
     }
 
     /**
-     * Atualizações em tempo de execução
+     * AtualizaÃ§Ãµes em tempo de execuÃ§Ã£o
      */
     /**
      * Atualiza propriedade url de Not Found
@@ -111,8 +113,8 @@ abstract class act
 
     /**
      * Carrega o layout corrente
-     * ToDo: receber somente o nome do arquivo e sua extensão
-     * deixar para a função pegar o local correto do request
+     * ToDo: receber somente o nome do arquivo e sua extensÃ£o
+     * deixar para a funÃ§Ã£o pegar o local correto do request
      *
      * @param string $name
      * @return void
@@ -145,7 +147,7 @@ abstract class act
     }
 
     /**
-     * Responde a requisição com uma view
+     * Responde a requisiÃ§Ã£o com uma view
      * @param unknown $my
      */
     final public function view($template = null, $model = null)
@@ -294,7 +296,7 @@ abstract class act
     }
     
     /**
-     * Responde requisi��o de json
+     * Responde requisiï¿½ï¿½o de json
      * @param unknown $my
      */
     final public function json($model)
@@ -303,7 +305,7 @@ abstract class act
     }
     
     /**
-     * Responde a requisição de html
+     * Responde a requisiÃ§Ã£o de html
      * @param type $model
      */
     final public function html($html)
@@ -312,21 +314,21 @@ abstract class act
     }
 
     /**
-     * Funções intrinsicas e para override
+     * FunÃ§Ãµes intrinsicas e para override
      */    
     /**
-     * Captura chamadas a funções inexistentes
+     * Captura chamadas a funÃ§Ãµes inexistentes
      * @param unknown $valor1
      * @param unknown $valor2
      */
     public function __call( $name, $arguments)
     {
-    	if(isset($this->notFound)){
-    		header("location:".$this->notFound);
-    	}
-    	else{
-    		header("location:". $this->request->notFound);
-    	}
+        if(isset($this->notFound)){
+            header("location:".$this->notFound);
+        }
+        else{
+            header("location:". $this->request->notFound);
+        }
     }
 
     /**
@@ -350,7 +352,7 @@ abstract class act
     }
 
     /**
-     * Função a ser executada no contexto da action
+     * FunÃ§Ã£o a ser executada no contexto da action
      */
     abstract public function main(...$param);
 

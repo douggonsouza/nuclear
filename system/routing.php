@@ -16,6 +16,7 @@ class routing
 	private $rota       = null;
 	private $folderMVC  = '';
 	private $notFound   = null;
+	protected $pathController = null;
    
 	/**
 	 * Evento construtor da classe
@@ -27,14 +28,14 @@ class routing
 	}    
 	  
 	/**
-	 * Direciona requisição para o action do controller
+	 * Direciona requisiÃ§Ã£o para o action do controller
 	 * @param string $base
 	 * @param string $url
 	 */
 	public function routes($url = null)
 	{
-		// verifica existencia de extensão
-		// define requisição direta
+		// verifica existencia de extensÃ£o
+		// define requisiÃ§Ã£o direta
 		$extension = $this->request->extension($url);
 		if(isset($extension) && strlen($extension) > 0){
 			try{
@@ -56,22 +57,22 @@ class routing
 		// guarda objeto com as rotas na controller
 		act::addRequest($this->request);
         if(!$this->request->isError){
-			$pathRoot = str_replace(
+			$this->pathController = str_replace(
 				array('/','//','\\','\\\\'),
 				'/',   
-				$this->request->localController.DS.$this->request->action);
+				$this->request->localController.$this->request->action.'.php');
            
-			// carrega endereço de requisição direta
+			// carrega endereÃ§o de requisiÃ§Ã£o direta
 			if($this->request->isDirect){
-				$pathRoot = $this->request->localFile;
-				$pathRoot = str_replace(
+				$this->pathController = $this->request->localFile;
+				$this->pathController = str_replace(
 					array('/','//','\\','\\\\'),
 					'/',  
-					$pathRoot);
+					$this->pathController);
 			}       
            
 			// objetiva controller e action
-            if(file_exists($pathRoot.'.php')){
+            if(file_exists($this->pathController)){
 				if($this->request->isDirect){
 					$display = new display();
 					$display->render($this->request);
@@ -81,8 +82,7 @@ class routing
 				$fileAct = str_replace(
 					array('/','//','\\','\\\\'),
 					'\\',   
-					$this->request->controller.DS.$this->request->action);
-				//$fileAct = $this->request->controller.DS.$this->request->action;
+					$this->request->controller.$this->request->action);
                 $this->act = new $fileAct();                            
                 if(isset($this->act)){
             
@@ -112,7 +112,7 @@ class routing
 	 */
 	private function applyArguments($controller, $arguments)
 	{
-		// disparo anterior a ação
+		// disparo anterior a aÃ§Ã£o
 		$controller->__before();
 
 		$countArguments = count($arguments);
@@ -206,7 +206,7 @@ class routing
 			break;
 		}
 
-		// disparo anterior a ação
+		// disparo anterior a aÃ§Ã£o
 		$controller->__after();
 	}    
 }
