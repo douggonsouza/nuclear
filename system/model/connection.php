@@ -27,7 +27,7 @@ class connection
 				'mysql:='.$db['DB_ORIGEM_HOST'].';dbname='.$db['DB_ORIGEM_SCHEMA'],
                 $db['DB_ORIGEM_LOGIN'],
                 $db['DB_ORIGEM_SENHA'],
-                array(\PDO::ATTR_PERSISTENT => true));
+            	[\PDO::ATTR_PERSISTENT => true]);
             return (isset(self::$origem))? self::$origem: null;
         }
         return self::$origem;
@@ -48,7 +48,7 @@ class connection
 				'mysql:host='.$db['DB_DESTINO_HOST'].';dbname='.$db['DB_DESTINO_SCHEMA'],
                 $db['DB_DESTINO_LOGIN'],
                 $db['DB_DESTINO_SENHA'],
-                array(\PDO::ATTR_PERSISTENT => true));
+                [\PDO::ATTR_PERSISTENT => true]);
             return (isset(self::$destino))? self::$destino: null;
         }
         return self::$destino;

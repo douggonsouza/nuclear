@@ -40,7 +40,7 @@ class routing
 		if(isset($extension) && strlen($extension) > 0){
 			try{
 				$extensionClear = str_replace(
-				cfg::getCfg('root')['file_job'],
+				cfg::rescue('root')['file_job'],
 				'',
 				$extension);
 				if($extensionClear !== "")

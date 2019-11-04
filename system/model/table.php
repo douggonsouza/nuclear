@@ -3,7 +3,6 @@
 namespace vendor\douggs\nuclear\system\model;
 
 use vendor\douggs\nuclear\system\model\a_entity;
-use vendor\douggs\nuclear\system\model\entity;
 
     /**
      * Entity
@@ -25,11 +24,13 @@ use vendor\douggs\nuclear\system\model\entity;
          * 
          * @param string $table
          */
-        public function __construct($table = null)
+        public function __construct($table = null, $fields = null)
         {
             $this->table($table);
             if(isset($table))
-        		$this->infoTable = parent::getColumns($table);
+                $this->infoTable = $this->getColumns($table);
+            if(isset($fields))
+                $this->setFields($fields);
         }
         
         /**
@@ -40,7 +41,7 @@ use vendor\douggs\nuclear\system\model\entity;
         public function fields($fields = null, $value = null, $tipo = null)
         {
         	if(isset($this->infoTable) && isset($fields)) {
-        		$this->infoTable = parent::getColumns($this->table);
+        		$this->infoTable = $this->getColumns($this->table);
                 foreach($this->infoTable as $chv => $vle) {
                 	if(array_key_exists($vle['Field'], $fields)) {
                     	if(isset($fields[$vle['Field']]))
@@ -52,7 +53,48 @@ use vendor\douggs\nuclear\system\model\entity;
                 return $this;
             }
             if(isset($this->table)){
-                $this->infoTable = parent::getColumns($this->table);
+                $this->infoTable = $this->getColumns($this->table);
+                foreach($this->infoTable as $chv => $vle) {
+                    if(array_key_exists($vle['Field'], $fields)) {
+                        if(isset($fields[$vle['Field']]))
+                            $this->infoTable[$chv]['Value'] = $fields[$vle['Field']];
+                        else
+                            $this->infoTable[$chv]['Value'] = null;
+                    }
+                }
+            }
+            return $this;
+        }
+
+        /**
+         * Carrega os campos
+         * 
+         * @param array $fields
+         * 
+         * @return object
+         */
+        private function setFields(array $fields = null)
+        {
+        	if(isset($this->infoTable) && isset($fields)) {
+        		$this->infoTable = $this->getColumns($this->table);
+                foreach($this->infoTable as $chv => $vle) {
+                	if(array_key_exists($vle['Field'], $fields)) {
+                        if(isset($fields[$vle['Field']])){
+                            if(!is_array($fields[$vle['Field']])){
+                                $this->infoTable[$chv]['Value'] = $fields[$vle['Field']];
+                                continue;
+                            }
+                            $this->infoTable[$chv]['Value'] = $fields[$vle['Field']][0];
+                            continue;
+                        }
+                    	else
+                    		$this->infoTable[$chv]['Value'] = null;
+                    }
+                }
+                return $this;
+            }
+            if(isset($this->table)){
+                $this->infoTable = $this->getColumns($this->table);
                 foreach($this->infoTable as $chv => $vle) {
                     if(array_key_exists($vle['Field'], $fields)) {
                         if(isset($fields[$vle['Field']]))
@@ -97,7 +139,7 @@ use vendor\douggs\nuclear\system\model\entity;
          * @return type
          */
         public function getPk(){
-            return parent::key($this->infoTable);
+            return $this->key($this->infoTable);
         }
         
         /**

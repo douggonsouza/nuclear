@@ -8,6 +8,7 @@ use vendor\douggs\nuclear\system\model\table;
 use vendor\douggs\nuclear\app\orbe;
 use vendor\douggs\nuclear\configs\cfg;
 use vendor\douggs\nuclear\system\model\orm;
+use vendor\douggs\nuclear\alerts\alerts;
     
 /**
  * Carrega registro de routes conforme a string de requesiÃ§Ã£o
@@ -184,6 +185,7 @@ abstract class act
     final public function redirect($local)
     {
         if(isset($local) && strlen($local) > 0){
+            alerts::saveInSession();
             header("location: ".$local);
             die();
         }

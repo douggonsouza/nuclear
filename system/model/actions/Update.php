@@ -1,10 +1,10 @@
 <?php
 
-namespace system\model\actions;
+namespace vendor\douggs\nuclear\system\model\actions;
 	
-	use system\model\actions\Action;
-    use system\model\entity;
-    use system\model\table;
+	use vendor\douggs\nuclear\system\model\actions\Action;
+    use vendor\douggs\nuclear\system\model\entity;
+    use vendor\douggs\nuclear\system\model\table;
 
 	class Update implements Action{
 		
@@ -47,29 +47,22 @@ namespace system\model\actions;
 			
             try{
 
-                // testa a tipagem
-                if(isset($entity) && $entity instanceof a_entity){
-
-                    // forma query
-                    $sql = $this->queryString($entity);
-                    // testa query
-                    if(isset($sql) && strlen($sql) > 0){
-
-                        // forma prepare de inclusão da entidade
-                        $stt = $this->conn->prepare($sql);
-                        // testa a execução da inclusão
-                        $this->status = $stt->execute();
-                        return $this->status;
-                    }
-                    else // diapara erro
-                        throw new \Exception('Sem ação definida.');					
+                // forma query
+                $sql = $this->queryString($entity);
+                // testa query
+                if(isset($sql) && strlen($sql) > 0){
+                
+                    // forma prepare de inclusão da entidade
+                    $stt = $this->conn->prepare($sql);
+                    // testa a execução da inclusão
+                    $this->status = $stt->execute();
+                    return $this->status;
                 }
-                else	
-                    throw new \Exception('Sem entidade.');
+                else // diapara erro
+                    throw new \Exception('Sem ação definida.');					
             }
             catch(\Exception $e)
             {
-
                 // sob nível da chamada de erro
                 throw new \Exception($e->getMessage());
             }

@@ -49,8 +49,8 @@ class display{
         $this->headered(
             $local,
             $request,
-            cfg::getCfg('direct_request')['binary'],
-            cfg::getCfg('direct_request')['download']);
+            cfg::rescue('direct_request')['binary'],
+            cfg::rescue('direct_request')['download']);
         readfile($local);
         die();
     }

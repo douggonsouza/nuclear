@@ -1,10 +1,10 @@
 <?php
 
-namespace system\model\actions;
+namespace vendor\douggs\nuclear\system\model\actions;
 
-use system\model\actions\Action;
-use system\model\entity;
-use system\model\table;
+use vendor\douggs\nuclear\system\model\actions\Action;
+use vendor\douggs\nuclear\system\model\entity;
+use vendor\douggs\nuclear\system\model\table;
 
 	class Select implements Action{
 
@@ -50,33 +50,27 @@ use system\model\table;
 		public function exec($entity){
 
             try{
-
-                // testa a tipagem
-                if(isset($entity) && $entity instanceof a_entity){
-
-                    // forma query
-                    $sql = $this->queryString($entity);
-                    // forma prepare de inclusão da entidade
-                    $stt = $this->conn->prepare($sql);
-                    // testa a execução da inclusão
-                    try{
-                        
-                        if($stt->execute()){
-
-                            $this->status = $stt->fetchAll(\PDO::FETCH_ASSOC);
-                            return $this->status();
-                        }
-                    }
-                    catch(\Exception $e){
-                        
-                        throw new \Exception($e->getMessage);
+            
+                // forma query
+                $sql = $this->queryString($entity);
+                // forma prepare de inclusão da entidade
+                $stt = $this->conn->prepare($sql);
+                // testa a execução da inclusão
+                try{
+                    
+                    if($stt->execute()){
+                
+                        $this->status = $stt->fetchAll(\PDO::FETCH_ASSOC);
+                        return $this->status();
                     }
                 }
-                else
-                    throw new \Exception('Sem data.');
+                catch(\Exception $e){
+                    
+                    throw new \Exception($e->getMessage);
+                }
             }
             catch(\Exception $e){
-
+            
                 // sob nível da chamada de erro
                 throw new \Exception($e->getMessage());
             }

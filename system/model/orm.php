@@ -5,7 +5,12 @@ namespace vendor\douggs\nuclear\system\model;
 use vendor\douggs\nuclear\system\model\connection;
 use vendor\douggs\nuclear\system\model\entity;
 use vendor\douggs\nuclear\system\model\table;
-use vendor\douggs\nuclear\system\model\actions as action;
+use vendor\douggs\nuclear\system\model\actions\Query;
+use vendor\douggs\nuclear\system\model\actions\Insert;
+use vendor\douggs\nuclear\system\model\actions\Update;
+use vendor\douggs\nuclear\system\model\actions\Delete;
+use vendor\douggs\nuclear\system\model\actions\Select;
+use vendor\douggs\nuclear\system\model\actions\Call;
 
 
 abstract class orm
@@ -59,7 +64,7 @@ abstract class orm
      * @return type
      */
     final public function insert(a_entity $entity){
-        $insert = new action\Insert(self::getConn());
+        $insert = new Insert(self::getConn());
         return $insert->exec($entity);
     }
     
@@ -69,7 +74,7 @@ abstract class orm
      * @return type
      */
     final public function update(a_entity $entity){
-        $update = new action\Update(self::getConn());
+        $update = new Update(self::getConn());
         return $update->exec($entity);
     }
     
@@ -79,7 +84,7 @@ abstract class orm
      * @return type
      */
     final public function delete(a_entity $entity){
-        $delete = new action\Delete(self::getConn());
+        $delete = new Delete(self::getConn());
         return $delete->exec($entity);
     }
     
@@ -90,7 +95,7 @@ abstract class orm
      * @return type
      */
     final public function select(a_entity $entity){
-        $select = new action\Select(self::getConn());
+        $select = new Select(self::getConn());
         return $select->exec($entity);
     }
     
@@ -100,7 +105,7 @@ abstract class orm
      * @return type
      */
     final public function query($sql){
-        $query = new action\Query(self::getConn());
+        $query = new Query(self::getConn());
         return $query->exec($sql);
     }
     
@@ -110,7 +115,7 @@ abstract class orm
      * @return type
      */
     final public function call(a_entity $entity){
-        $call = new action\Call(self::getConn());
+        $call = new Call(self::getConn());
         return $call->exec($entity);
     }
     
@@ -198,6 +203,58 @@ abstract class orm
             throw new \Exception('Not found model '.$local.'.');
         }
         return null;
+    }
+
+    /**
+     * Export seleção da entidade
+     * @return type
+     */
+    final public function getSelect(){
+        return new Select(self::getConn());
+    }
+
+    /**
+     * Export query da entidade
+     * @return type
+     */
+    final public function getQuery(){
+        return new Query(self::getConn());
+    }
+
+    /**
+     * Export insert da entidade
+     * @return type
+     */
+    final public function getInsert(){
+        return new Insert(self::getConn());
+    }
+
+    /**
+     * Export update da entidade
+     * @return type
+     */
+    final public function getUpdate(){
+        return new Update(self::getConn());
+    }
+
+    /**
+     * Export delete da entidade
+     * @param entity $entity
+     * @param string $where
+     * @return type
+     */
+    final public function getDelete(){
+        return new Delete(self::getConn());
+    }
+
+    /**
+     * Export call da entidade
+     * @param entity $entity
+     * @param string $where
+     * @return type
+     */
+    final public function getCall(){
+        return new Call(self::getConn());
     }
 	
 }

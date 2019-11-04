@@ -1,10 +1,10 @@
 <?php
 
-namespace system\model\actions;
+namespace vendor\douggs\nuclear\system\model\actions;
 	
-	use system\model\actions\Action;
-    use system\model\entity;
-    use system\model\table;
+	use vendor\douggs\nuclear\system\model\actions\Action;
+    use vendor\douggs\nuclear\system\model\entity;
+    use vendor\douggs\nuclear\system\model\table;
 	
 	class Delete implements Action{
 		
@@ -49,33 +49,27 @@ namespace system\model\actions;
 		 */
 		public function exec($entity){
 			
-                    try{
-
-                        // testa recepção da variável
-                        if(isset($entity) && $entity instanceof a_entity){
-
-                            // forma query
-                            $sql = $this->queryString($entity);
-                            // testa query
-                            if(isset($sql) && strlen($sql) > 0){
-
-                                // forma prepare de inclusão da entidade
-                                $stt = $this->conn->prepare($sql);
-                                // executa deleção
-                                $this->status = $stt->execute();
-                                return $this->status;
-                            }
-                        }
-                        else	
-                            throw new \Exception('Sem entidade.');	
-                    }
-                    catch(\Exception $e)
-                    {
-
-                        // sob nível da chamada de erro
-                        throw new \Exception($e->getMessage());
-                    }
-                    return false;
+            try{
+            
+                // forma query
+                $sql = $this->queryString($entity);
+                // testa query
+                if(isset($sql) && strlen($sql) > 0){
+                
+                    // forma prepare de inclusão da entidade
+                    $stt = $this->conn->prepare($sql);
+                    // executa deleção
+                    $this->status = $stt->execute();
+                    return $this->status;
+                }	
+            }
+            catch(\Exception $e)
+            {
+            
+                // sob nível da chamada de erro
+                throw new \Exception($e->getMessage());
+            }
+            return false;
 		}
 		
 		/**

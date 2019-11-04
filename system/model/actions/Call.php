@@ -1,9 +1,9 @@
 <?php
 
-namespace system\model\actions;
+namespace vendor\douggs\nuclear\system\model\actions;
 	
-	use system\model\actions\Action;
-    use system\model\entity;
+	use vendor\douggs\nuclear\system\model\actions\Action;
+    use vendor\douggs\nuclear\system\model\entity;
 
 	class Call implements Action{
 		
@@ -48,33 +48,27 @@ namespace system\model\actions;
 		 */
 		public function exec($entity){
 			
-                    try{
-
-                        // testa a tipagem
-                        if(isset($entity) && $entity instanceof a_entity){
-
-                            // forma query
-                            $sql = $this->queryString($entity);
-                            // forma prepare de inclusão da entidade
-                            $stt = $this->conn->prepare($sql);						
-                            // testa a execução da inclusão
-                            if($stt->execute()){
-
-                                $this->status = $stt->fetchAll(\PDO::FETCH_ASSOC);
-                                return true;
-                            }
-                            else
-                                throw new \Exception('Sem ação.');
-                        }
-                        else	
-                            throw new \Exception('Sem data.');
-                    }
-                    catch(\Exception $e){
-
-                        // sob nível da chamada de erro
-                        throw new \Exception($e->getMessage());
-                    }
-                    return false;
+            try{
+            
+                // forma query
+                $sql = $this->queryString($entity);
+                // forma prepare de inclusão da entidade
+                $stt = $this->conn->prepare($sql);						
+                // testa a execução da inclusão
+                if($stt->execute()){
+                
+                    $this->status = $stt->fetchAll(\PDO::FETCH_ASSOC);
+                    return true;
+                }
+                else
+                    throw new \Exception('Sem ação.');
+            }
+            catch(\Exception $e){
+            
+                // sob nível da chamada de erro
+                throw new \Exception($e->getMessage());
+            }
+            return false;
 		}
 		
 		/**

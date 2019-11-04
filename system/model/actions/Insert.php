@@ -1,10 +1,11 @@
 <?php
 
-namespace system\model\actions;
+namespace vendor\douggs\nuclear\system\model\actions;
 
-	use system\model\actions\Action;
-    use system\model\entity;
-    use system\model\table;
+    use vendor\douggs\nuclear\system\model\actions\Action;
+    use vendor\douggs\nuclear\system\model\a_entity;
+    use vendor\douggs\nuclear\system\model\entity;
+    use vendor\douggs\nuclear\system\model\table;
 	
 	class Insert implements Action{
 		
@@ -50,53 +51,46 @@ namespace system\model\actions;
 		 */
 		public function exec($entity){
             try{
+                // forma query
+                $sql = $this->queryString($entity);
 
-                // testa a tipagem
-                if(isset($entity) && $entity instanceof a_entity){
+                // testa query
+                if(isset($sql) && strlen($sql) > 0){
 
-                    // forma query
-                    $sql = $this->queryString($entity);
-                    //
-                    // testa query
-                    if(isset($sql) && strlen($sql) > 0){
+                    // forma prepare de inclusão da entidade
+                    $stt = $this->conn->prepare($sql);
+                    try{
                         
-                        // forma prepare de inclusão da entidade
-                        $stt = $this->conn->prepare($sql);
-                        try{
+                        // testa a execução da inclusão
+                        if($stt->execute()){
                             
-                            // testa a execução da inclusão
+                            // forma query MAX key
+                            $sql = 'SELECT
+                                        MAX(`'.$entity->getPk().'`) AS '.$entity->getPk().'
+                                    FROM
+                                        '.$entity->getTable().'
+                                    LIMIT 0,1;';
+                            
+                            // prepara consulta MAX
+                            $stt = $this->conn->prepare($sql);
                             if($stt->execute()){
-                                
-                                // forma query MAX key
-                                $sql = 'SELECT
-                                            MAX(`'.$entity->getPk().'`) AS '.$entity->getPk().'
-                                        FROM
-                                            '.$entity->getTable().'
-                                        LIMIT 0,1;';
-                                
-                                // prepara consulta MAX
-                                $stt = $this->conn->prepare($sql);
-                                if($stt->execute()){
-
-                                    $rst = $stt->fetchAll(\PDO::FETCH_ASSOC);
-                                    $this->status = (int) $rst[0][$entity->getPk()];
-                                    return $this->status;
-                                }
+                
+                                $rst = $stt->fetchAll(\PDO::FETCH_ASSOC);
+                                $this->status = (int) $rst[0][$entity->getPk()];
+                                return $this->status;
                             }
-                            else
-                                $err = $stt->errorInfo();
-                                throw new \Exception('PDO/ERROR: '.$err[2].': '.$err[1].': '.$sql);
                         }
-                        catch (\Exception $e) {                                    
-                            
-                            throw new \Exception($e->getMessage());
-                        }
+                        else
+                            $err = $stt->errorInfo();
+                            throw new \Exception('PDO/ERROR: '.$err[2].': '.$err[1].': '.$sql);
                     }
-                    else
-                        throw new \Exception('Dados insuficientes.');
+                    catch (\Exception $e) {                                    
+                        
+                        throw new \Exception($e->getMessage());
+                    }
                 }
                 else
-                    throw new \Exception('Sem entidade.');
+                    throw new \Exception('Dados insuficientes.');
 
             }
             catch(\Exception $e)

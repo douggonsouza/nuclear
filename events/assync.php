@@ -26,7 +26,7 @@ class assync{
 			set_time_limit(0); // run script forever
 			
 			// inicia curl
-			$this->curl = curl_init(cfg::getCfg('general')['BASEHOST'].$this->url_api);
+			$this->curl = curl_init(cfg::rescue('general')['BASEHOST'].$this->url_api);
 			if(isset($this->curl)){
 				curl_setopt($this->curl, CURLOPT_FOLLOWLOCATION, true );
 				curl_setopt($this->curl, CURLOPT_BINARYTRANSFER, true);

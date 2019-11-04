@@ -1,6 +1,6 @@
 <?php
 
-namespace system\model\actions;
+namespace vendor\douggs\nuclear\system\model\actions;
 
 	interface Action{
 		

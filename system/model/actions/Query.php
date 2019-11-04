@@ -1,9 +1,9 @@
 <?php
 
-namespace system\model\actions;
+namespace vendor\douggs\nuclear\system\model\actions;
 
-use system\model\actions\Action;
-use system\model\entity;
+use vendor\douggs\nuclear\system\model\actions\Action;
+use vendor\douggs\nuclear\system\model\entity;
 
 class Query implements Action
 {
@@ -55,7 +55,6 @@ class Query implements Action
             $stt = $this->conn->prepare($query);
             if($stt->execute()){
                 $this->status = $stt->fetchAll(\PDO::FETCH_ASSOC);
-                $logs::setQuery($query);
                 return $this->status();
             }
         }
