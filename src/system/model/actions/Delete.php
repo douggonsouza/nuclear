@@ -1,7 +1,12 @@
 <?php
 
 namespace Nuclear\system\model\actions;
-	
+
+/**
+ * deprecated class
+ *
+ */
+
 	use Nuclear\system\model\actions\Action;
     use Nuclear\system\model\entity;
     use Nuclear\system\model\table;

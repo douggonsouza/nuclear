@@ -2,7 +2,7 @@
 
 namespace Nuclear\system;
 
-use Nuclear\system\control\act;
+use Nuclear\system\control\action;
 use Nuclear\system\request\request;
 use Nuclear\loader\loader;
 use Nuclear\configs\cfg;

@@ -12,6 +12,10 @@ use Nuclear\system\model\actions\Delete;
 use Nuclear\system\model\actions\Select;
 use Nuclear\system\model\actions\Call;
 
+/**
+ * deprecated class
+ *
+ */
 
 abstract class orm
 {

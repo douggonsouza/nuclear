@@ -16,34 +16,6 @@
     "autoload": {
         "psr-4": {
             "Nuclear\\": "src/"
-        },
-        "classmap": [
-            "src/alerts/alerts.php",
-            "src/app/propertys.php",
-            "src/app/orbe.php",
-            "src/events/dir_xml.php",
-            "src/events/assync.php",
-            "src/events/events.php",
-            "src/system/mask_action/i_mask_action.php",
-            "src/system/mask_action/mask_action.php",
-            "src/system/model/a_entity.php",
-            "src/system/model/entity.php",
-            "src/system/model/table.php",
-            "src/system/model/connection.php",
-            "src/system/model/actions/Action.php",
-            "src/system/model/actions/Call.php",
-            "src/system/model/actions/Delete.php",
-            "src/system/model/actions/Insert.php",
-            "src/system/model/actions/Query.php",
-            "src/system/model/actions/Select.php",
-            "src/system/model/actions/Update.php",
-            "src/system/model/orm.php",
-            "src/system/view/mimes.php",
-            "src/system/view/display.php",
-            "src/system/view/view.php",
-            "src/system/request/request.php",
-            "src/system/control/act.php",
-            "src/system/routing.php"
-        ]
+        }
     }
 }

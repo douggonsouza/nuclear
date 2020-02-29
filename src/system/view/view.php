@@ -21,10 +21,10 @@ class view extends display
     public  $template  = null;
     public  $localView = null;
     
-    public function __construct($pathView = null, $localView = null)
+    public function __construct($pathView = null, $view = null)
     {
         $this->setView($pathView);
-        $this->setLocalView($localView);
+        $this->setTemplate($view);
     }
 
     /**
@@ -61,7 +61,7 @@ class view extends display
     {
         if(isset($this->layout) && strlen($this->layout) > 0){
             $this->variables($model);
-            parent::body($this->layouts.DS.$this->layout, $this->variables);
+            parent::body($this->layouts, $this->variables);
         }
     }
     

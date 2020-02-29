@@ -2,6 +2,11 @@
 
 namespace Nuclear\system\model;
 
+/**
+ * deprecated class
+ *
+ */
+
 use Nuclear\system\model\orm;
 
 abstract class a_entity{

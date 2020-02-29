@@ -2,6 +2,11 @@
 
 namespace Nuclear\system\view;
 
+/**
+ * deprecated class
+ *
+ */
+
 interface contract_view
 {
 

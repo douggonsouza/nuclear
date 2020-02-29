@@ -2,6 +2,11 @@
 
 namespace Nuclear\system\model\actions;
 
+/**
+ * deprecated class
+ *
+ */
+
 	interface Action{
 		
 		//----- PROPRIEDADES -----

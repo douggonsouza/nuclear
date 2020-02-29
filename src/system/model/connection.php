@@ -2,6 +2,11 @@
 
 namespace Nuclear\system\model;
 
+/**
+ * deprecated class
+ *
+ */
+
 use Nuclear\configs\cfg;
 
 class connection

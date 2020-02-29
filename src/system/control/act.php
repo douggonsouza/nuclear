@@ -20,49 +20,18 @@ abstract class act
 {
 
     public  $variables = null;
-    public  $view      = null;
     public  $template  = null;
     private $notFound  = null;
     public  $orm       = null;
     static  $request   = null;
-    
-    /**
-     * Evento construtor da classe
-     */
-    public function __construct()
-    {
-        // FunÃ§Ã£o de partida
-        $this->__start();
-    }
-
-    /**
-     * FunÃ§Ã£o que inicializaÃ§Ã£o
-     *
-     * @return void
-     */
-    public function __start()
-    {        
-        $view = str_replace(
-            array('/','//','\\','\\\\'),
-            '/',
-            self::$request->view);
-        $this->view = new view($view, self::$request->localView);
-        // Altera propriedades
-        orm::setModel(self::$request->localModel);
-        $this->setLayouts(self::$request->layout);
-        $this->setLayout(cfg::rescue('root')['default_layout']);
-        $this->notFound(self::$request->notFound);
-        $this->setTemplates(self::$request->localView);
-        // define variaveis para o ambiente
-        $this->defineVariables();
-    }
+    static  $view      = null;
 
     /**
      * Undocumented function
      *
      * @return void
      */
-    private function defineVariables()
+    public function defineVariables()
     {
         define('__oScripts',str_replace(
             array('/','//','\\','\\\\'),
@@ -105,6 +74,19 @@ abstract class act
         $this->notFound = $notFound;
     }
 
+        /**
+     * Carrega o layout corrente
+     * ToDo: receber somente o nome do arquivo e sua extensÃ£o
+     * deixar para a funÃ§Ã£o pegar o local correto do request
+     *
+     * @param string $name
+     * @return void
+     */
+    public static function addView($baseView, $view)
+    {
+        self::$view = new view($baseView, $view);
+    }
+
     /**
      * Carrega o layout corrente
      * ToDo: receber somente o nome do arquivo e sua extensÃ£o
@@ -120,7 +102,7 @@ abstract class act
                 array('/','//','\\','\\\\'),
                 '/',
                 $name);
-            $this->view->layout($layout);
+            self::$view->layout($layout);
             return;
         }
         throw new \Exception('Value is argument Local is null.');
@@ -133,7 +115,7 @@ abstract class act
     final public function template($name = null)
     {
         if(isset($name) && strlen($name) > 0){
-            $this->view->template($name);
+            self::$view->template($name);
             $this->template = $name;
             return;
         }
@@ -141,14 +123,14 @@ abstract class act
     }
 
     /**
-     * Responde a requisiÃ§Ã£o com uma view
+     * Responde a requisição com uma view
      * @param unknown $my
      */
     final public function view($template = null, $model = null)
     {
         if(isset($template) && !empty($template))
             $this->setTemplate($template);
-        $this->view->view($model);
+        self::$view->view($model);
     }
 
     /**
@@ -204,7 +186,7 @@ abstract class act
      */ 
     public function getLayouts()
     {
-        return $this->view->getLayouts();
+        return self::$view->getLayouts();
     }
     
     /**
@@ -214,7 +196,7 @@ abstract class act
      */ 
     final public function setLayouts($layouts)
     {
-        $this->view->setLayouts($layouts);
+        self::$view->setLayouts($layouts);
     }
 
     /**
@@ -222,7 +204,7 @@ abstract class act
      */ 
     final public function getLayout()
     {
-        return $this->view->getLayout();
+        return self::$view->getLayout();
     }
     
     /**
@@ -232,7 +214,7 @@ abstract class act
      */ 
     final public function setLayout($layout)
     {
-        $this->view->setLayout($layout);
+        self::$view->setLayout($layout);
     }
 
     /**
@@ -240,7 +222,7 @@ abstract class act
      */ 
     final public function getTemplates()
     {
-        return $this->view->getTemplates();
+        return self::$view->getTemplates();
     }
 
     /**
@@ -251,7 +233,7 @@ abstract class act
      */
     final public function setTemplates($templates)
     {
-            $this->view->templates = $templates;
+            self::$view->templates = $templates;
     }
 
     /**
@@ -259,7 +241,7 @@ abstract class act
      */ 
     final public function getTemplate()
     {
-        return $this->view->getTemplate();
+        return self::$view->getTemplate();
     }
     
     /**
@@ -269,7 +251,7 @@ abstract class act
      */ 
     final public function setTemplate($template)
     {
-        $this->view->setTemplate($template);
+        self::$view->setTemplate($template);
     }
 
     /**
@@ -277,7 +259,7 @@ abstract class act
      */ 
     final public function getView()
     {
-        return $this->view->getView();
+        return self::$view->getView();
     }
     
     /**
@@ -287,7 +269,7 @@ abstract class act
      */ 
     final public function setView($template = null, $model = null)
     {
-        $this->view($template, $model);
+        self::$view($template, $model);
     }
     
     /**
@@ -296,7 +278,7 @@ abstract class act
      */
     final public function json($model)
     {
-        $this->view->json($model);
+        self::$view->json($model);
     }
     
     /**
@@ -305,7 +287,7 @@ abstract class act
      */
     final public function html($html)
     {
-        $this->view->html($html);
+        self::$view->html($html);
     }
 
     /**

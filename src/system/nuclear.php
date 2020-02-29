@@ -1,6 +1,8 @@
 <?php
 
-class nClass extends \stdClass
+namespace Nuclear\system;
+
+class nuclear extends \stdClass
 {
     /**
      * Captura chamadas a funções inexistentes
@@ -9,7 +11,7 @@ class nClass extends \stdClass
      */
     public function __call( $name, $arguments)
     {
-        throw new \Exception('Function not found.');
+        return true;
     }
 }
 

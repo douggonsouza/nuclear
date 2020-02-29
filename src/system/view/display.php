@@ -8,24 +8,24 @@ use Nuclear\configs\cfg;
 class display{
 	
 	/**
-	 * Responde com o conte�do do arquivo
+	 * Responde com o conteúdo do arquivo
 	 * @param string $local
 	 */
-    final function body($local, $variables = null)
+    final function body($local, $params = null)
     {
         if(file_exists($local)){
-            if(isset($variables) && !empty($variables)){
-                foreach($variables as $key => $vle){
+            if(isset($params) && !empty($params)){
+                foreach($params as $key => $vle){
                     $$key = $vle;
                 }                        
             }
             return include($local);
         }
-    return '';
+        return '';
 	}
                
     /**
-	 * Responde com o conte�do do arquivo
+	 * Responde com o conteúdo do arquivo
 	 * @param string $local
 	 */
     final function output($local)
