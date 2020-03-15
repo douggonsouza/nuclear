@@ -4,90 +4,82 @@ namespace Nuclear\alerts;
 
 abstract class alerts{
 
-    static $alerta = '';
-
-    static $modelo = '<div>
-        <div class="alert %s alert-dismissible">
-            <button type="button" class="close" data-dismiss="alert" aria-hidden="true" style="float:right">&times;</button>
-            <strong>%s</strong> %s</div>
-    </div>';
+    static $modelo = DRT.'/root/home/views/notika/alert.phtml';
 
     const SUCCESS = 'success';
     const ERROR   = 'error';
     const WARNING = 'warning';
     const INFO    = 'info';
 
-    /** 
-     * Evento de construção da classe
-     * 
-     */
-    public function __construct()
-    {
-        self::searchInSession($_SESSION);
-    }
-
     /**
-     * Busca pela mensagem de alerta na sess�o
+     * Busca pela mensagem de alerta na sessão
      * 
-     * @param array $session
      * 
      * @return bool
      */
-    static final function searchInSession($session)
+    static final function searchInSession()
     {
-        if(!isset($session['msgAlert']) || empty($session['msgAlert'])){
+        if(!isset($_SESSION['msgAlert']) || empty($_SESSION['msgAlert'])){
             return false;
         }
-        self::$alerta = $session['msgAlert']['msg'];
-        return true;
+        return $_SESSION['msgAlert']['msgs'];
     }
 
     /**
-     * Salva na sess�o a mensagem de alerta
+     * Salva na sessão a mensagem de alerta
      * 
      * @return array
      */
-    static final function saveInSession()
+    protected final function saveInSession(string $alert)
     {
-        if(!isset(self::$alerta) || empty(self::$alerta)){
+        if(!isset($alert) || empty($alert)){
             return false;
         }
-        $_SESSION['msgAlert'] = [
-            'msg' => self::$alerta
-        ];
+
+        $_SESSION['msgAlert']['msgs'][] = $alert;
         return true;
     }
 
     /**
-     * Devolve o conte�do do alerta
+     * Devolve o conteúdo do alerta
      * 
      * @param string $mensagem
      * @param string $type
      * 
      * @return string
      */
-    static final public function set($mensagem,$type = 'success'){
+    static final public function set($mensagem,$type = 'success')
+    {
+        // colhe o modelo
+        if(file_exists(self::getModelo()))
+            $modelo = file_get_contents(self::getModelo());
 
+        if(!isset($modelo))
+            return self;
+        
         // testa o conteúdo da variável
         if(isset($mensagem) && strlen($mensagem) > 0){
             switch($type){
                 case self::SUCCESS:                        
-                    self::$alerta = sprintf(self::$modelo, 'alert-success', 'Success!:', $mensagem);
+                    $alert = sprintf($modelo, 'success', 'Sucesso!: '.$mensagem);
                     break;
                 case self::ERROR:  
-                    self::$alerta = sprintf(self::$modelo, 'alert-danger', 'Danger!: ', $mensagem);                      
+                    $alert = sprintf($modelo, 'danger', 'Perigo!: '.$mensagem);                      
                     break;
                 case self::WARNING:
-                    self::$alerta = sprintf(self::$modelo, 'alert-warning', 'Warning!: ', $mensagem);                       
+                    $alert = sprintf($modelo, 'warning', 'Cuidado!: '.$mensagem);                       
                     break;                    
                 case self::INFO:
-                    self::$alerta = sprintf(self::$modelo, 'alert-info', 'Info!: ', $mensagem);                        
+                    $alert = sprintf($modelo, 'info', 'Informação!: '.$mensagem);                        
                     break;
                 default: 
-                    self::$alerta = sprintf(self::$modelo, 'alert-success', 'Success!: ', $mensagem);                                              
+                    $alert = sprintf($modelo, 'success', 'Sucesso!: '.$mensagem);                                              
             }
         }
-        return self::$alerta;
+
+        self::saveInSession($alert);
+
+        return self;
     }
 
     /**
@@ -99,12 +91,13 @@ abstract class alerts{
      */
     final public function get($clear = true)
     {
-        $alert = self::$alerta;                  		
-        if(isset(self::$alerta) && !empty(self::$alerta)){
-            if($clear) self::$alerta = '';
-            return $alert;
-        }
-        return '';
+        $alerts = self::searchInSession();
+                        
+        if(!isset($alerts) || empty($alerts))
+            self::setExists(false);
+
+        if($clear) $_SESSION['msgAlert']['msgs'] = [];
+        return implode("\n ",$alerts);
     }
 
     /**
@@ -112,13 +105,8 @@ abstract class alerts{
      */
     final public function clear()
     {
-        self::$alerta = '';
+        self::$alerta = [];
         return self;
-    }
-
-    final function exist()
-    {
-        return isset(self::$alerta) && !empty(self::$alerta);
     }
 
     /**
@@ -136,9 +124,23 @@ abstract class alerts{
      */ 
     public function setModelo($modelo)
     {
-        $this->modelo = $modelo;
+        self::$modelo = $modelo;
 
-        return $this;
+        return self;
+    }
+
+    /**
+     * Get the value of exists
+     */ 
+    final public function exist()
+    {
+        if(isset($_SESSION['msgAlert']) && !empty($_SESSION['msgAlert'])){
+            if(!empty($_SESSION['msgAlert']['msgs']))
+                return true;
+            return false;
+        }
+
+        return false;
     }
 }
 
