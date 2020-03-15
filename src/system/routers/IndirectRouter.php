@@ -40,7 +40,7 @@ class IndirectRouter extends nuclear implements routerInterface
 
         // Trata a Url
         if(!$this->clearUrl($url))
-            throw new Exception('Do not possible clear Url.');
+            throw new \Exception('Do not possible clear Url.');
 
         // carrega rotas
         $this->routings();
@@ -49,7 +49,7 @@ class IndirectRouter extends nuclear implements routerInterface
         orm::setModel($this->router->namespaceModels);
         
         if(!$this->configAct())
-            throw new Exception('Do not possible change Act.');
+            throw new \Exception('Do not possible change Act.');
         
         // executa controller
         $this->controller = $this->calls->init(

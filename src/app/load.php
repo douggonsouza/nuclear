@@ -1,9 +1,8 @@
 <?php
 
 	// inclui configurações locais
-	// include_once dirname(__FILE__) .'/../loader/loader.php';
 	include_once dirname(__FILE__) .'/../configs/cfg.php';
-	include_once dirname(__FILE__) .'/../configs/geral.cfg';
+
 	// arquivos usados
 	use Nuclear\configs\cfg;
 	// use Nuclear\loader\loader;

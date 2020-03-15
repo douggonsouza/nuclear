@@ -66,38 +66,20 @@ class resources extends executes implements resourceInterface
 
         return null;
     }
-
+    
     /**
-     * Resgata valor existente em data
+     * Reposiciona o ponteiro do recurso
      *
-     * @param  string $field
-     * @return void
-     */
-    final public function getValue($field)
-    {
-        if(isset($field))
-            return $this->getProperty($field, 'Value');
-
-        return null;
-    }
-
-    /**
-     * Aplica valor em data
+     * @param int $possition - Número da nova possição do ponteiro
      *
-     * @param  string $field
-     * @return void
+     * @return bool
      */
-    final public function setValue(string $field, $value)
+    private function reposition(int $position)
     {
-        if(isset($field) && isset($value)){
-            if(isset($this->data[$field]) && $this->data[$field]->Value != $value)
-            $this->old[$field] = $this->data[$field];
-            $this->isUpdate = true;
+        if(!isset($position) || empty($position))
+            return false;
 
-        }
-        $this->setProperty($field, 'Value', $value);
-
-        return true;
+        return mysqli_data_seek($this->getResource(), $position);
     }
 
     /**
@@ -134,7 +116,7 @@ class resources extends executes implements resourceInterface
             return null;
 
         $this->setRow(($this->getRow() - 2));
-        mysqli_data_seek ($this->getResource(), $this->getRow());
+        $this->reposition((int) $this->getRow());
 
         $this->next();
 
@@ -151,7 +133,7 @@ class resources extends executes implements resourceInterface
             return null;
 
         $this->setRow(0);
-        mysqli_data_seek ($this->getResource(), $this->getRow());
+        $this->reposition((int) $this->getRow());
 
         $this->next();
 
@@ -166,9 +148,9 @@ class resources extends executes implements resourceInterface
     {
         if($this->getResource() === null)
             return null;
-            
+
         $this->setRow($this->getRows() - 1);
-        mysqli_data_seek ($this->getResource(), $this->getRow());
+        $this->reposition((int) $this->getRow());
 
         $this->next();
 
@@ -182,6 +164,61 @@ class resources extends executes implements resourceInterface
     public function __call($function, $arguments)
     {
         return false;
+    }
+
+    /**
+     * Set the value of resource
+     *
+     * @return  self
+     */ 
+    public function initResource($sql, &$new = true)
+    {
+        // é query modelo
+        $this->setTable($this->isQueryModel($sql));
+
+        if(!isset($sql) || !isset($this->table))
+            return null;
+
+        $this->setResource($this->select($sql));
+
+        $this->matchInfoFields($this->getTable());
+
+        if($this->next() !== null)
+            $new = false;
+
+        return $this;
+    }
+
+    /**
+     * Se ocorreu um update em algum dos dados
+     *
+     * @return boolean
+     */
+    public function isUpdate()
+    {
+        return $this->isUpdate;
+    }
+
+    public function isQueryModel(string $sql)
+    {
+        if(stripos($sql, 'SELECT') === false)
+            return null;
+
+        $ofFrom = substr($sql, stripos($sql, 'FROM') + 5, strlen($sql));
+        $table = substr($ofFrom,0,strpos($ofFrom, ' '));
+
+        if(empty($table))
+            return null;
+
+        return $table;
+    }
+
+    /**
+     * Get the value of data
+     */ 
+    public function getData()
+    {
+        return $this->data;
     }
 
     /**
@@ -201,48 +238,10 @@ class resources extends executes implements resourceInterface
     {
         if(isset($resource)){
             $this->resource = $resource;
+            $this->setRows($this->getResource()->num_rows);
         }
 
         return $this;
-    }
-
-    /**
-     * Set the value of resource
-     *
-     * @return  self
-     */ 
-    public function initResource($sql, &$new = true)
-    {
-        // é query modelo
-        $this->setTable($this->isQueryModel($sql));
-
-        if(!isset($sql) || !isset($this->table))
-            return null;
-
-        $this->setResource($this->select($sql));
-
-        $this->setRows($this->getResource()->num_rows);
-
-        $this->matchInfoFields($this->getTable());
-
-        if($this->next() !== null)
-            $new = false;
-
-        return $this;
-    }
-
-    public function isQueryModel(string $sql)
-    {
-        if(stripos($sql, 'SELECT') === false)
-            return null;
-
-        $ofFrom = substr($sql, stripos($sql, 'FROM') + 5, strlen($sql));
-        $table = substr($ofFrom,0,strpos($ofFrom, ' '));
-
-        if(empty($table))
-            return null;
-
-        return $table;
     }
 
     /**
@@ -268,14 +267,6 @@ class resources extends executes implements resourceInterface
         $this->row = $row;
 
         return $this;
-    }
-
-    /**
-     * Get the value of data
-     */ 
-    public function getData()
-    {
-        return $this->data;
     }
 
     /**
@@ -319,6 +310,39 @@ class resources extends executes implements resourceInterface
     }
 
     /**
+     * Resgata valor existente em data
+     *
+     * @param  string $field
+     * @return void
+     */
+    final public function getValue($field)
+    {
+        if(isset($field))
+            return $this->getProperty($field, 'Value');
+
+        return null;
+    }
+
+    /**
+     * Aplica valor em data
+     *
+     * @param  string $field
+     * @return void
+     */
+    final public function setValue(string $field, $value)
+    {
+        if(isset($field) && isset($value)){
+            if(isset($this->data[$field]) && $this->data[$field]->Value != $value)
+            $this->old[$field] = $this->data[$field];
+            $this->isUpdate = true;
+
+        }
+        $this->setProperty($field, 'Value', $value);
+
+        return true;
+    }
+
+    /**
      * Get the value of rows
      */ 
     public function getRows()
@@ -336,16 +360,6 @@ class resources extends executes implements resourceInterface
         $this->rows = $rows;
 
         return $this;
-    }
-
-    /**
-     * Se ocorreu um update em algum dos dados
-     *
-     * @return boolean
-     */
-    public function isUpdate()
-    {
-        return $this->isUpdate;
     }
 
     /**
@@ -367,5 +381,30 @@ class resources extends executes implements resourceInterface
             $this->table = $table;
 
         return $this;
+    }
+
+    /**
+     *
+     * Devolve os valores do recurso em forma de array
+     *
+     * @param bool $all
+     *
+     * @return array
+     */
+    public function _as_array(bool $all = false)
+    {
+        if(empty($this->getData()))
+            return [];
+
+        if($all){
+            return mysqli_fetch_all($this->getResource(), MYSQLI_ASSOC);
+        }
+
+        $data = [];
+        foreach($this->getData() as $index => $value){
+            $data[$index] = $value['Value'];
+        }
+
+        return $data;
     }
 }

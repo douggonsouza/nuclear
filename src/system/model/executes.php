@@ -63,10 +63,13 @@ class Executes implements resourceInterface
      */
     final public function query(string $sql)
     {
-        return mysqli_query (
-            $this->getConnection(),
-            $sql
-        );
+        if(!isset($sql))
+            return false;
+
+        mysqli_query ($this->getConnection(), 'SET SQL_SAFE_UPDATES = 0;');
+        $result = mysqli_query ($this->getConnection(), $sql);
+        mysqli_query ($this->getConnection(), 'SET SQL_SAFE_UPDATES = 1;');
+        return $result;
     }
 
     final public function totalRows($resource)
@@ -173,11 +176,7 @@ class Executes implements resourceInterface
         );
 
         // executa query
-        $this->query('SET SQL_SAFE_UPDATES = 0;');
-        $result = $this->query($sql);
-        $this->query('SET SQL_SAFE_UPDATES = 1;');
-
-        return $result;
+        return $this->query($sql);
     }
 
     /**
@@ -215,11 +214,7 @@ class Executes implements resourceInterface
             implode(' AND ', $primary)
         );
 
-        // executa query
-        $this->query('SET SQL_SAFE_UPDATES = 0;');
-        $result = $this->query($sql);
-        $this->query('SET SQL_SAFE_UPDATES = 1;');
-
-        return $result;
+        // executa query;
+        return $this->query($sql);
     }
 }

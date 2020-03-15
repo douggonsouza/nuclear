@@ -120,7 +120,7 @@ abstract class action implements viewInterface
      */
     final public function params($params = null)
     {
-        return self::$view->params($model);
+        return self::$view->params($params);
     }
 
     /**
@@ -132,7 +132,7 @@ abstract class action implements viewInterface
         if(isset($name) && strlen($name) > 0){
             return orm::model($name);
         }
-        return orm::model();
+        return;
     }
     
     /**
