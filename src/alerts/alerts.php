@@ -7,10 +7,10 @@ abstract class alerts{
     static $alerta = '';
 
     static $modelo = '<div>
-                            <div class="alert %s alert-dismissible">
-                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true" style="float:right">&times;</button>
-                                <strong>%s</strong> %s</div>
-                        </div>';
+        <div class="alert %s alert-dismissible">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true" style="float:right">&times;</button>
+            <strong>%s</strong> %s</div>
+    </div>';
 
     const SUCCESS = 'success';
     const ERROR   = 'error';
@@ -18,7 +18,7 @@ abstract class alerts{
     const INFO    = 'info';
 
     /** 
-     * Evento de constru��o da classe
+     * Evento de construção da classe
      * 
      */
     public function __construct()

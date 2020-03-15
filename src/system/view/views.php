@@ -9,12 +9,12 @@ use Nuclear\system\view\viewInterface;
 
 class views extends display implements viewInterface
 {
-    private $params       = array(); // Array de variáveis que serão transformadas em parâmetros de ambiente
-    public  $baseLayouts  = null; // Localização da pasta de layout
-    public  $layout       = null; // Nome do arquivo de layout
-    public  $baseViews    = null; // Localização da pasta das views
-    public  $atualView    = null; // Localização da pasta da view atual
-    public  $view         = null; // Nome do arquivo de view
+    protected $params       = array(); // Array de variáveis que serão transformadas em parâmetros de ambiente
+    public $baseLayouts  = null; // Localização da pasta de layout
+    public $layout       = null; // Nome do arquivo de layout
+    public $baseViews    = null; // Localização da pasta das views
+    public $atualView    = null; // Localização da pasta da view atual
+    public $view         = null; // Nome do arquivo de view
     
     public function __construct($baseLayouts, $layout, $baseViews, $atualView, $view)
     {
@@ -173,5 +173,10 @@ class views extends display implements viewInterface
         if(isset($layout) && !empty($layout))
             $this->layout = $layout;
         return $this;
+    }
+
+    public function getParams()
+    {
+        return $this->params;
     }
 }        

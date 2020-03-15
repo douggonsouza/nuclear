@@ -1,4 +1,5 @@
 vendor/
+src/session/
 configs/geral.cfg
 index.php
 # Not VSCode

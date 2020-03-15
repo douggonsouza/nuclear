@@ -5,56 +5,25 @@ namespace Nuclear\system\model;
 use Nuclear\system\model\executes;
 use Nuclear\system\model\resources;
 use Nuclear\system\model\resourceInterface;
-use Nuclear\system\model\modelsInterface;
+use Nuclear\system\model\entitysInterface;
 
-class models extends executes implements resourceInterface, modelsInterface
+class entitys extends executes implements resourceInterface, entitysInterface
 {  
-    public    $table;
     public    $key;
     public    $new = true;
     protected $resource;
     protected $columns = [];
 
-    public function __construct(string $key = null)
-    {
-        if(isset($key))
-            $this->getBy($key);
-    }
-
-    public function getBy($value, string $index)
-    {
-        if(!isset($value) || isset($this->table) || isset($this->key)){
-            return false;
-        }
-
-        $this->setResource(new resources(
-            sprintf("SELECT * FROM %s WHERE %s = %s AND active = 1;",
-                $this->table,
-                $index,
-                $value), 
-            $this->new
-        ));
-
-        return $this;
-    }
-
-    public function search(array $fields)
+    public function search(string $sql)
     {
         $where = [];
 
-        if(!isset($fields) || empty($fields)){
+        if(!isset($sql) || empty($sql)){
             return false;
-        }
-        foreach($fields as $index => $value){
-            $where[] = $index.' = '.trim($value);
         }
 
         $this->setResource(new resources(
-            sprintf(
-                "SELECT * FROM %s WHERE %s AND active = 1;",
-                $this->table,
-                implode(' AND ',$where)
-                ),
+            $sql,
             $this->new
         ));
 
@@ -88,28 +57,6 @@ class models extends executes implements resourceInterface, modelsInterface
     final public function delete()
     {
         return $this->deleteResource($data, $this->table);
-    }
-
-    /**
-     * Set the value of relationships
-     *
-     * @return  self
-     */ 
-    public function relationships(string $destinyTable, string $fieldLink)
-    {
-        if(!isset($destinyTable) || !isset($fieldLink))
-            return null;
-
-        if($this->getTable() === null || $this->getValue($fieldLink) === null)
-            return null;
-
-        return new resources(sprintf(
-            resourceInterface::RELATIONSHIPS_MANY_TO_ONE,
-            $this->getTable(),
-            $destinyTable,
-            $fieldLink,
-            $this->getValue($fieldLink)
-            ));
     }
 
     /**
@@ -171,29 +118,6 @@ class models extends executes implements resourceInterface, modelsInterface
     public function setResource($resource)
     {
         $this->resource = $resource;
-
-        return $this;
-    }
-
-    /**
-     * Colhe o valor para table
-     */ 
-    public function getTable()
-    {
-        return $this->table;
-    }
-
-    /**
-     * Define o valor para table
-     *
-     * @param string $table
-     *
-     * @return  self
-     */ 
-    public function setTable(string $table)
-    {
-        if(isset($table) && !empty($table))
-            $this->table = $table;
 
         return $this;
     }

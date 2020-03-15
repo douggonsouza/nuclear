@@ -19,6 +19,8 @@
     define('PROTOCOL', strtolower(explode('/',$_SERVER['SERVER_PROTOCOL'])[0]).'://');
     // HH - URL completa
     define('HH',$_SERVER['HTTP_HOST']);
+    // URL
+    define('BASE_URL',PROTOCOL.HH);
     // REQUEST
     define('REQUEST',HH.$_SERVER['REQUEST_URI']);
     // SN - URL do DNS
