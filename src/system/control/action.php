@@ -107,7 +107,6 @@ abstract class action implements viewInterface
     final public function redirect($local)
     {
         if(isset($local) && strlen($local) > 0){
-            alerts::saveInSession();
             header("location: ".$local);
             die();
         }

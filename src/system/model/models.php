@@ -6,6 +6,7 @@ use Nuclear\system\model\executes;
 use Nuclear\system\model\resources;
 use Nuclear\system\model\resourceInterface;
 use Nuclear\system\model\modelsInterface;
+use Nuclear\system\model\dicionary;
 
 class models extends executes implements resourceInterface, modelsInterface
 {  
@@ -15,10 +16,12 @@ class models extends executes implements resourceInterface, modelsInterface
     protected $resource;
     protected $columns = [];
 
+    protected $dicionarySQL = "SELECT %s as value, %s as label FROM %s;";
+
     public function __construct(string $key = null)
     {
-        if(isset($key))
-            $this->getBy($key);
+        if(isset($key) && isset($this->key))
+            $this->getBy($key, $this->key);
     }
 
     public function getBy($value, string $index)
@@ -87,6 +90,8 @@ class models extends executes implements resourceInterface, modelsInterface
      */
     final public function delete()
     {
+        // colher os dados (data)
+        $data = $this->resource->getData();
         return $this->deleteResource($data, $this->table);
     }
 
@@ -110,6 +115,18 @@ class models extends executes implements resourceInterface, modelsInterface
             $fieldLink,
             $this->getValue($fieldLink)
             ));
+    }
+
+    /**
+     * Exporta objeto do tipo dicionary
+     * 
+     * @param string $dicionarySQL
+     * 
+     * @return object
+     */
+    public function dicionary(string $dicionarySQL)
+    {
+        return new dicionary($this->select($dicionarySQL));
     }
 
     /**
@@ -159,7 +176,7 @@ class models extends executes implements resourceInterface, modelsInterface
             $this->resource = new resources();
             $this->resource->matchInfoFields( $this->table);
         }
-        
+
         return $this->resource;
     }
 

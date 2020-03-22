@@ -4,7 +4,7 @@ namespace Nuclear\alerts;
 
 abstract class alerts{
 
-    static $modelo = DRT.'/root/home/views/notika/alert.phtml';
+    static $modelo = __DIR__.'/alert.phtml';
 
     const SUCCESS = 'success';
     const ERROR   = 'error';
@@ -30,7 +30,7 @@ abstract class alerts{
      * 
      * @return array
      */
-    protected final function saveInSession(string $alert)
+    public final function saveInSession(string $alert)
     {
         if(!isset($alert) || empty($alert)){
             return false;

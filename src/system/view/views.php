@@ -9,6 +9,7 @@ use Nuclear\system\view\viewInterface;
 
 class views extends display implements viewInterface
 {
+    const HELPER_NAMESPACE = 'Nuclear\\system\\view\\helpers\\';
     protected $params       = array(); // Array de variáveis que serão transformadas em parâmetros de ambiente
     public $baseLayouts  = null; // Localização da pasta de layout
     public $layout       = null; // Nome do arquivo de layout
@@ -23,6 +24,18 @@ class views extends display implements viewInterface
         $this->baseViews   = $baseViews;
         $this->atualView   = $atualView;
         $this->view        = $view;
+    }
+
+    /**
+     * Instancia de classe helper
+     *
+     * @param string $class
+     * @return void
+     */
+    final public function helper(string $class)
+    {
+        $class = self::HELPER_NAMESPACE.$class;
+        return new $class();
     }
 
     /**
