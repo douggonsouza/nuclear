@@ -9,7 +9,7 @@ use Nuclear\system\view\viewInterface;
 
 class views extends display implements viewInterface
 {
-    const HELPER_NAMESPACE = 'Nuclear\\system\\view\\helper\\';
+    const HELPER_NAMESPACE = 'Nuclear\\system\\view\\helpers\\';
     protected $params       = array(); // Array de variáveis que serão transformadas em parâmetros de ambiente
     public $baseLayouts  = null; // Localização da pasta de layout
     public $layout       = null; // Nome do arquivo de layout

@@ -1,6 +1,6 @@
 <?php
 
-namespace Nuclear\system\view\helper;
+namespace Nuclear\system\view\helpers;
 
 class html
 {
