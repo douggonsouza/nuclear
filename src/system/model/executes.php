@@ -3,7 +3,6 @@
 namespace Nuclear\system\model;
 
 use Nuclear\app\orbe;
-use Nuclear\system\model\conn;
 use Nuclear\system\model\resourceInterface;
 
 class Executes implements resourceInterface
