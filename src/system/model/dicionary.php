@@ -45,7 +45,7 @@ class dicionary extends \stdClass
     {
         if (isset($list) && !empty($list)) {
             if (isset($list['value']) && isset($list['label']))
-                $this->list[$list['value']] = $list['label'];
+                $this->list[] = $list;
         }
 
         return $this;

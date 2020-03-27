@@ -7,6 +7,8 @@ use Nuclear\system\model\resourceInterface;
 
 class Executes implements resourceInterface
 {
+    const MYSQLI_ASSOC = 1;
+
     static    $connection  = null;
     protected $transaction = null;
 
@@ -83,6 +85,19 @@ class Executes implements resourceInterface
     public function select(string $sql)
     {
         return $this->query($sql);
+    }
+
+    /**
+     * Devolve array associativo de todos os registros
+     * 
+     * @return array|null
+     */
+    public function fetchAll($resource, $type = self::MYSQLI_ASSOC)
+    {
+        if(!isset($resource) | empty($resource))
+            return null;
+
+        return $resource->fetch_all($type);
     }
 
     /**

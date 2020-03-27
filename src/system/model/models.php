@@ -141,7 +141,7 @@ class models extends executes implements resourceInterface, modelsInterface
      * Resgata valor existente em data
      *
      * @param  string $field
-     * @return void
+     * @return mixed
      */
     final public function getValue($field)
     {
@@ -155,7 +155,7 @@ class models extends executes implements resourceInterface, modelsInterface
      * Resgata valor existente em data
      *
      * @param  string $field
-     * @return void
+     * @return mixed
      */
     final public function setValue(string $field, $value)
     {
