@@ -4,7 +4,7 @@ namespace Nuclear\system\model;
 
 class dicionary extends \stdClass
 {
-    public $list;
+    public $list = [];
 
     /**
      * Evanto construtor

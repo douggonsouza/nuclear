@@ -29,7 +29,7 @@ class Executes implements resourceInterface
      * 
      * @return boolean
      */
-    final public function beginTransaction()
+    public function beginTransaction()
     {
         // desabilita autocommit
         $this->transaction = $this->query('START TRANSACTION');
