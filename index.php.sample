@@ -26,8 +26,10 @@
 	ini_set('display_startup_errors', 1);
 	ini_set('display_errors', 1);
 
+	// autoloader
+	include "vendor/autoload.php";
     // include defines
     include "root/defines.php";
     // inicia app
-    include VA."/app/load.php";
+    include VA."/src/app/load.php";
 ?>
