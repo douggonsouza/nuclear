@@ -1,6 +1,3 @@
-/vendor/
 /src/session/
 /.vscode/
-index.php
 *.code-workspace
-*geral.cfg
